@@ -1,17 +1,17 @@
 form:
-  compatibility:
-    type: tab
-    title: Compatibility
+  compatibility:  # 配置部分：兼容性设置
+    type: tab  # 定义为选项卡
+    title: 兼容性  # 选项卡标题：兼容性
     fields:
-      object.compat.events:
-        type: toggle
-        toggleable: true
-        label: Admin event compatibility
-        help: Enables onAdminSave and onAdminAfterSave events for plugins
-        highlight: 1
-        default: 1
-        options:
-          1: PLUGIN_ADMIN.ENABLED
-          0: PLUGIN_ADMIN.DISABLED
+      object.compat.events:  # 后台事件兼容性设置
+        type: toggle  # 开关类型
+        toggleable: true  # 允许切换此配置项
+        label: Admin event compatibility  # 标签：后台事件兼容性
+        help: 为插件启用 onAdminSave 和 onAdminAfterSave 事件 # 帮助信息：为插件启用 onAdminSave 和 onAdminAfterSave 事件
+        highlight: 1  # 默认高亮选项
+        default: 1  # 默认值为启用
+        options:  # 开关选项
+          1: PLUGIN_ADMIN.ENABLED  # 启用
+          0: PLUGIN_ADMIN.DISABLED  # 禁用
         validate:
-          type: bool
+          type: bool  # 验证输入为布尔值

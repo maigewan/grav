@@ -1,36 +1,37 @@
-title: PLUGIN_ADMIN.MODULE
-extends@: default
+title: PLUGIN_ADMIN.MODULE  # 配置标题：模块设置
+extends@: default  # 继承自默认类型
 
 form:
   fields:
-    tabs:
-      type: tabs
-      active: 1
+    tabs:  # 选项卡设置
+      type: tabs  # 定义为选项卡类型
+      active: 1  # 默认激活第一个选项卡
 
       fields:
-        content:
+
+        content:  # 内容选项卡
           fields:
 
-            modular_title:
-              type: spacer
-              title: PLUGIN_ADMIN.MODULE_SETUP
+            modular_title:  # 模块化设置标题
+              type: spacer  # 占位符，用于显示分隔标题
+              title: PLUGIN_ADMIN.MODULE_SETUP  # 显示的标题：模块设置
 
-            header.content.items:
-              type: text
-              label: PLUGIN_ADMIN.ITEMS
-              default: '@self.modular'
-              size: medium
+            header.content.items:  # 内容项字段
+              type: text  # 文本输入类型
+              label: PLUGIN_ADMIN.ITEMS  # 标签：内容项
+              default: '@self.modular'  # 默认值，表示当前模块化内容
+              size: medium  # 输入框大小为中等
 
-            header.content.order.by:
-              type: text
-              label: PLUGIN_ADMIN.ORDER_BY
-              placeholder: date
-              help:
-              size: small
+            header.content.order.by:  # 排序依据字段
+              type: text  # 文本输入类型
+              label: PLUGIN_ADMIN.ORDER_BY  # 标签：排序依据
+              placeholder: date  # 提示占位符，默认为日期排序
+              help:  # 帮助信息
+              size: small  # 输入框大小为小
 
-            header.content.order.dir:
-              type: text
-              label: PLUGIN_ADMIN.ORDER
-              help: '"desc" or "asc" are valid values'
-              placeholder: desc
-              size: small
+            header.content.order.dir:  # 排序方向字段
+              type: text  # 文本输入类型
+              label: PLUGIN_ADMIN.ORDER  # 标签：排序方向
+              help: '"desc" 和 "asc" 是有效值'  # 帮助信息：有效值为 "desc" 或 "asc"
+              placeholder: desc  # 提示占位符，默认降序
+              size: small  # 输入框大小为小

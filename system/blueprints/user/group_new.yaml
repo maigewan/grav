@@ -1,23 +1,23 @@
-title: PLUGIN_ADMIN_PRO.ADD_GROUP
+title: PLUGIN_ADMIN_PRO.ADD_GROUP  # 配置标题：添加用户组
 
-rules:
-  slug:
-    pattern: '[a-zA-Zа-яA-Я0-9_\-]+'
-    min: 1
-    max: 200
+rules:  # 验证规则
+  slug:  # 定义 slug 验证规则
+    pattern: '[a-zA-Zа-яA-Я0-9_\-]+'  # 允许的字符：字母、数字、下划线和连字符
+    min: 1  # 最少 1 个字符
+    max: 200  # 最多 200 个字符
 
-form:
-  validation: loose
+form:  # 表单设置
+  validation: loose  # 验证模式为宽松，允许更灵活的输入
   fields:
 
-    content:
-      type: section
-      title: PLUGIN_ADMIN_PRO.ADD_GROUP
+    content:  # 添加用户组部分
+      type: section  # 定义为部分
+      title: PLUGIN_ADMIN_PRO.ADD_GROUP  # 标题：添加用户组
 
-    groupname:
-      type: text
-      label: PLUGIN_ADMIN_PRO.GROUP_NAME
-      help: PLUGIN_ADMIN_PRO.GROUP_NAME_HELP
+    groupname:  # 用户组名称字段
+      type: text  # 文本输入类型
+      label: PLUGIN_ADMIN_PRO.GROUP_NAME  # 标签：用户组名称
+      help: PLUGIN_ADMIN_PRO.GROUP_NAME_HELP  # 帮助信息：提供用户组名称
       validate:
-        required: true
-        rule: slug
+        required: true  # 验证为必填字段
+        rule: slug  # 使用定义的 slug 验证规则

@@ -1,124 +1,125 @@
-title: PLUGIN_ADMIN.SITE
+title: PLUGIN_ADMIN.SITE  # 配置标题：插件管理 - 站点设置
+
 form:
-    validation: loose
+    validation: loose  # 验证模式为宽松，允许输入格式更加灵活
     fields:
 
-        content:
-            type: section
-            title: PLUGIN_ADMIN.DEFAULTS
-            underline: true
+        content:  # 内容部分
+            type: section  # 定义部分
+            title: PLUGIN_ADMIN.DEFAULTS  # 标题：默认设置
+            underline: true  # 添加下划线以突出显示标题
 
             fields:
-                title:
-                    type: text
-                    label: PLUGIN_ADMIN.SITE_TITLE
-                    size: large
-                    placeholder: PLUGIN_ADMIN.SITE_TITLE_PLACEHOLDER
-                    help: PLUGIN_ADMIN.SITE_TITLE_HELP
+                title:  # 站点标题
+                    type: text  # 定义为文本类型
+                    label: PLUGIN_ADMIN.SITE_TITLE  # 标签：站点标题
+                    size: large  # 输入框大小为大号
+                    placeholder: PLUGIN_ADMIN.SITE_TITLE_PLACEHOLDER  # 提示：站点标题占位符
+                    help: PLUGIN_ADMIN.SITE_TITLE_HELP  # 帮助信息：描述站点标题的用途
 
-                default_lang:
-                    type: text
-                    label: PLUGIN_ADMIN.SITE_DEFAULT_LANG
-                    size: x-small
-                    placeholder: PLUGIN_ADMIN.SITE_DEFAULT_LANG_PLACEHOLDER
-                    help: PLUGIN_ADMIN.SITE_DEFAULT_LANG_HELP
+                default_lang:  # 默认语言
+                    type: text  # 定义为文本类型
+                    label: PLUGIN_ADMIN.SITE_DEFAULT_LANG  # 标签：默认语言
+                    size: x-small  # 输入框大小为超小号
+                    placeholder: PLUGIN_ADMIN.SITE_DEFAULT_LANG_PLACEHOLDER  # 提示：默认语言占位符
+                    help: PLUGIN_ADMIN.SITE_DEFAULT_LANG_HELP  # 帮助信息：描述默认语言的设置用途
 
-                author.name:
-                    type: text
-                    size: large
-                    label: PLUGIN_ADMIN.DEFAULT_AUTHOR
-                    help: PLUGIN_ADMIN.DEFAULT_AUTHOR_HELP
+                author.name:  # 默认作者名称
+                    type: text  # 定义为文本类型
+                    size: large  # 输入框大小为大号
+                    label: PLUGIN_ADMIN.DEFAULT_AUTHOR  # 标签：默认作者
+                    help: PLUGIN_ADMIN.DEFAULT_AUTHOR_HELP  # 帮助信息：描述作者名称的用途
 
-                author.email:
-                    type: text
-                    size: large
-                    label: PLUGIN_ADMIN.DEFAULT_EMAIL
-                    help: PLUGIN_ADMIN.DEFAULT_EMAIL_HELP
+                author.email:  # 默认作者邮箱
+                    type: text  # 定义为文本类型
+                    size: large  # 输入框大小为大号
+                    label: PLUGIN_ADMIN.DEFAULT_EMAIL  # 标签：默认电子邮箱
+                    help: PLUGIN_ADMIN.DEFAULT_EMAIL_HELP  # 帮助信息：描述作者邮箱的用途
                     validate:
-                        type: email
+                        type: email  # 验证输入为电子邮箱格式
 
-                taxonomies:
-                    type: selectize
-                    size: large
-                    label: PLUGIN_ADMIN.TAXONOMY_TYPES
-                    classes: fancy
-                    help: PLUGIN_ADMIN.TAXONOMY_TYPES_HELP
+                taxonomies:  # 分类类型
+                    type: selectize  # 定义为多选字段，支持动态输入
+                    size: large  # 输入框大小为大号
+                    label: PLUGIN_ADMIN.TAXONOMY_TYPES  # 标签：分类类型
+                    classes: fancy  # 应用自定义样式类，增强视觉效果
+                    help: PLUGIN_ADMIN.TAXONOMY_TYPES_HELP  # 帮助信息：描述分类类型的用途
                     validate:
-                        type: commalist
+                        type: commalist  # 验证为逗号分隔的值
 
-        summary:
-            type: section
-            title: PLUGIN_ADMIN.PAGE_SUMMARY
-            underline: true
+        summary:  # 页面摘要部分
+            type: section  # 定义部分
+            title: PLUGIN_ADMIN.PAGE_SUMMARY  # 标题：页面摘要
+            underline: true  # 添加下划线以突出显示标题
 
             fields:
-                summary.enabled:
-                    type: toggle
-                    label: PLUGIN_ADMIN.ENABLED
-                    highlight: 1
-                    help: PLUGIN_ADMIN.ENABLED_HELP
-                    options:
-                        1: PLUGIN_ADMIN.YES
-                        0: PLUGIN_ADMIN.NO
+                summary.enabled:  # 启用页面摘要
+                    type: toggle  # 定义为切换按钮类型
+                    label: PLUGIN_ADMIN.ENABLED  # 标签：启用
+                    highlight: 1  # 高亮默认选项
+                    help: PLUGIN_ADMIN.ENABLED_HELP  # 帮助信息：描述启用页面摘要的作用
+                    options:  # 可选项
+                        1: PLUGIN_ADMIN.YES  # 选项：是
+                        0: PLUGIN_ADMIN.NO  # 选项：否
                     validate:
-                        type: bool
+                        type: bool  # 验证为布尔值
 
-                summary.size:
-                    type: text
-                    size: small
-                    append: PLUGIN_ADMIN.CHARACTERS
-                    label: PLUGIN_ADMIN.SUMMARY_SIZE
-                    help: PLUGIN_ADMIN.SUMMARY_SIZE_HELP
+                summary.size:  # 页面摘要大小
+                    type: text  # 定义为文本类型
+                    size: small  # 输入框大小为小号
+                    append: PLUGIN_ADMIN.CHARACTERS  # 在输入框后附加字符单位
+                    label: PLUGIN_ADMIN.SUMMARY_SIZE  # 标签：摘要大小
+                    help: PLUGIN_ADMIN.SUMMARY_SIZE_HELP  # 帮助信息：描述摘要大小的作用
                     validate:
-                        type: int
-                        min: 0
-                        max: 65536
+                        type: int  # 验证为整数
+                        min: 0  # 最小值为 0
+                        max: 65536  # 最大值为 65536
 
-                summary.format:
-                    type: toggle
-                    label: PLUGIN_ADMIN.FORMAT
-                    classes: fancy
-                    help: PLUGIN_ADMIN.FORMAT_HELP
-                    highlight: short
-                    options:
-                        'short': PLUGIN_ADMIN.SHORT
-                        'long': PLUGIN_ADMIN.LONG
+                summary.format:  # 页面摘要格式
+                    type: toggle  # 定义为切换按钮类型
+                    label: PLUGIN_ADMIN.FORMAT  # 标签：格式
+                    classes: fancy  # 应用自定义样式类
+                    help: PLUGIN_ADMIN.FORMAT_HELP  # 帮助信息：描述摘要格式的用途
+                    highlight: short  # 高亮默认选项
+                    options:  # 可选项
+                        'short': PLUGIN_ADMIN.SHORT  # 选项：短格式
+                        'long': PLUGIN_ADMIN.LONG  # 选项：长格式
 
-                summary.delimiter:
-                    type: text
-                    size: x-small
-                    label: PLUGIN_ADMIN.DELIMITER
-                    help: PLUGIN_ADMIN.DELIMITER_HELP
+                summary.delimiter:  # 页面摘要分隔符
+                    type: text  # 定义为文本类型
+                    size: x-small  # 输入框大小为超小号
+                    label: PLUGIN_ADMIN.DELIMITER  # 标签：分隔符
+                    help: PLUGIN_ADMIN.DELIMITER_HELP  # 帮助信息：描述分隔符的作用
 
-        metadata:
-            type: section
-            title: PLUGIN_ADMIN.METADATA
-            underline: true
+        metadata:  # 元数据部分
+            type: section  # 定义部分
+            title: PLUGIN_ADMIN.METADATA  # 标题：元数据
+            underline: true  # 添加下划线以突出显示标题
 
             fields:
-                metadata:
-                   type: array
-                   label: PLUGIN_ADMIN.METADATA
-                   help: PLUGIN_ADMIN.METADATA_HELP
-                   placeholder_key: PLUGIN_ADMIN.METADATA_KEY
-                   placeholder_value: PLUGIN_ADMIN.METADATA_VALUE
+                metadata:  # 元数据设置
+                   type: array  # 定义为数组类型
+                   label: PLUGIN_ADMIN.METADATA  # 标签：元数据
+                   help: PLUGIN_ADMIN.METADATA_HELP  # 帮助信息：描述元数据的用途
+                   placeholder_key: PLUGIN_ADMIN.METADATA_KEY  # 键占位符：元数据键
+                   placeholder_value: PLUGIN_ADMIN.METADATA_VALUE  # 值占位符：元数据值
 
-        routes:
-            type: section
-            title: PLUGIN_ADMIN.REDIRECTS_AND_ROUTES
-            underline: true
+        routes:  # 重定向与路由部分
+            type: section  # 定义部分
+            title: PLUGIN_ADMIN.REDIRECTS_AND_ROUTES  # 标题：重定向与路由
+            underline: true  # 添加下划线以突出显示标题
 
             fields:
-                redirects:
-                    type: array
-                    label: PLUGIN_ADMIN.CUSTOM_REDIRECTS
-                    help: PLUGIN_ADMIN.CUSTOM_REDIRECTS_HELP
-                    placeholder_key: PLUGIN_ADMIN.CUSTOM_REDIRECTS_PLACEHOLDER_KEY
-                    placeholder_value: PLUGIN_ADMIN.CUSTOM_REDIRECTS_PLACEHOLDER_VALUE
+                redirects:  # 自定义重定向
+                    type: array  # 定义为数组类型
+                    label: PLUGIN_ADMIN.CUSTOM_REDIRECTS  # 标签：自定义重定向
+                    help: PLUGIN_ADMIN.CUSTOM_REDIRECTS_HELP  # 帮助信息：描述重定向的用途
+                    placeholder_key: PLUGIN_ADMIN.CUSTOM_REDIRECTS_PLACEHOLDER_KEY  # 键占位符：源路径
+                    placeholder_value: PLUGIN_ADMIN.CUSTOM_REDIRECTS_PLACEHOLDER_VALUE  # 值占位符：目标路径
 
-                routes:
-                    type: array
-                    label: PLUGIN_ADMIN.CUSTOM_ROUTES
-                    help: PLUGIN_ADMIN.CUSTOM_ROUTES_HELP
-                    placeholder_key: PLUGIN_ADMIN.CUSTOM_ROUTES_PLACEHOLDER_KEY
-                    placeholder_value: PLUGIN_ADMIN.CUSTOM_ROUTES_PLACEHOLDER_VALUE
+                routes:  # 自定义路由
+                    type: array  # 定义为数组类型
+                    label: PLUGIN_ADMIN.CUSTOM_ROUTES  # 标签：自定义路由
+                    help: PLUGIN_ADMIN.CUSTOM_ROUTES_HELP  # 帮助信息：描述路由的用途
+                    placeholder_key: PLUGIN_ADMIN.CUSTOM_ROUTES_PLACEHOLDER_KEY  # 键占位符：自定义路径
+                    placeholder_value: PLUGIN_ADMIN.CUSTOM_ROUTES_PLACEHOLDER_VALUE  # 值占位符：目标路径

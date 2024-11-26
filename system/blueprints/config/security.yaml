@@ -1,119 +1,124 @@
-title: PLUGIN_ADMIN.SECURITY
+title: PLUGIN_ADMIN.SECURITY  # 配置标题：插件管理 - 安全性
 
 form:
-    validation: loose
+    validation: loose  # 验证模式为宽松，允许输入格式更加灵活
     fields:
 
         xss_section:
-            type: section
-            title: PLUGIN_ADMIN.XSS_SECURITY
-            underline: true
+            type: section  # 定义 XSS 防护部分
+            title: PLUGIN_ADMIN.XSS_SECURITY  # 标题：XSS 安全性
+            underline: true  # 添加下划线以突出显示部分标题
 
         xss_whitelist:
-            type: selectize
-            size: large
-            label: PLUGIN_ADMIN.XSS_WHITELIST_PERMISSIONS
-            help: PLUGIN_ADMIN.XSS_WHITELIST_PERMISSIONS_HELP
-            placeholder: 'admin.super'
-            classes: fancy
+            type: selectize  # 定义为多选字段，支持动态输入
+            size: large  # 输入框大小为大号
+            label: PLUGIN_ADMIN.XSS_WHITELIST_PERMISSIONS  # 标签：XSS 白名单权限
+            help: PLUGIN_ADMIN.XSS_WHITELIST_PERMISSIONS_HELP  # 帮助信息：描述白名单权限的作用
+            placeholder: 'admin.super'  # 提示占位符，建议输入超级管理员权限
+            classes: fancy  # 应用自定义样式类，增强视觉效果
             validate:
-                type: commalist
+                type: commalist  # 验证为逗号分隔的值，例如多项权限
 
         xss_enabled.on_events:
-            type: toggle
-            label: PLUGIN_ADMIN.XSS_ON_EVENTS
-            highlight: 1
-            options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
-            default: true
+            type: toggle  # 定义为切换按钮类型
+            label: PLUGIN_ADMIN.XSS_ON_EVENTS  # 标签：启用事件中的 XSS 防护
+            highlight: 1  # 高亮默认选项
+            options:  # 可选项
+                1: PLUGIN_ADMIN.YES  # 选项：是
+                0: PLUGIN_ADMIN.NO  # 选项：否
+            default: true  # 默认值：启用
             validate:
-                type: bool
+                type: bool  # 验证为布尔值
 
         xss_enabled.invalid_protocols:
-            type: toggle
-            label: PLUGIN_ADMIN.XSS_INVALID_PROTOCOLS
-            highlight: 1
-            options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
-            default: true
+            type: toggle  # 定义为切换按钮类型
+            label: PLUGIN_ADMIN.XSS_INVALID_PROTOCOLS  # 标签：无效协议的 XSS 防护
+            highlight: 1  # 高亮默认选项
+            options:  # 可选项
+                1: PLUGIN_ADMIN.YES  # 选项：是
+                0: PLUGIN_ADMIN.NO  # 选项：否
+            default: true  # 默认值：启用
             validate:
-                type: bool
+                type: bool  # 验证为布尔值
 
         xss_invalid_protocols:
-            type: selectize
-            size: large
-            label: PLUGIN_ADMIN.XSS_INVALID_PROTOCOLS_LIST
-            classes: fancy
+            type: selectize  # 定义为多选字段，支持动态输入
+            size: large  # 输入框大小为大号
+            label: PLUGIN_ADMIN.XSS_INVALID_PROTOCOLS_LIST  # 标签：无效协议列表
+            classes: fancy  # 应用自定义样式类，增强视觉效果
             validate:
-                type: commalist
+                type: commalist  # 验证为逗号分隔的值，例如多个协议
 
         xss_enabled.moz_binding:
-            type: toggle
-            label: PLUGIN_ADMIN.XSS_MOZ_BINDINGS
-            highlight: 1
-            options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
-            default: true
+            type: toggle  # 定义为切换按钮类型
+            label: PLUGIN_ADMIN.XSS_MOZ_BINDINGS  # 标签：启用 moz-binding 的 XSS 防护
+            highlight: 1  # 高亮默认选项
+            options:  # 可选项
+                1: PLUGIN_ADMIN.YES  # 选项：是
+                0: PLUGIN_ADMIN.NO  # 选项：否
+            default: true  # 默认值：启用
             validate:
-                type: bool
+                type: bool  # 验证为布尔值
 
         xss_enabled.html_inline_styles:
-            type: toggle
-            label: PLUGIN_ADMIN.XSS_HTML_INLINE_STYLES
-            highlight: 1
-            options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
-            default: true
+            type: toggle  # 定义为切换按钮类型
+            label: PLUGIN_ADMIN.XSS_HTML_INLINE_STYLES  # 标签：启用 HTML 内联样式的 XSS 防护
+            highlight: 1  # 高亮默认选项
+            options:  # 可选项
+                1: PLUGIN_ADMIN.YES  # 选项：是
+                0: PLUGIN_ADMIN.NO  # 选项：否
+            default: true  # 默认值：启用
             validate:
-                type: bool
+                type: bool  # 验证为布尔值
 
         xss_enabled.dangerous_tags:
-            type: toggle
-            label: PLUGIN_ADMIN.XSS_DANGEROUS_TAGS
-            highlight: 1
-            options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
-            default: true
+            type: toggle  # 定义为切换按钮类型
+            label: PLUGIN_ADMIN.XSS_DANGEROUS_TAGS  # 标签：启用危险标签的 XSS 防护
+            highlight: 1  # 高亮默认选项
+            options:  # 可选项
+                1: PLUGIN_ADMIN.YES  # 选项：是
+                0: PLUGIN_ADMIN.NO  # 选项：否
+            default: true  # 默认值：启用
             validate:
-                type: bool
+                type: bool  # 验证为布尔值
 
         xss_dangerous_tags:
-            type: selectize
-            size: large
-            label: PLUGIN_ADMIN.XSS_DANGEROUS_TAGS_LIST
-            classes: fancy
+            type: selectize  # 定义为多选字段，支持动态输入
+            size: large  # 输入框大小为大号
+            label: PLUGIN_ADMIN.XSS_DANGEROUS_TAGS_LIST  # 标签：危险标签列表
+            classes: fancy  # 应用自定义样式类，增强视觉效果
             validate:
-                type: commalist
+                type: commalist  # 验证为逗号分隔的值，例如多个 HTML 标签
 
         uploads_section:
-            type: section
-            title: PLUGIN_ADMIN.UPLOADS_SECURITY
-            underline: true
-
+            type: section  # 定义上传安全性部分
+            title: PLUGIN_ADMIN.UPLOADS_SECURITY  # 标题：上传安全性
+            underline: true  # 添加下划线以突出显示部分标题
 
         uploads_dangerous_extensions:
-            type: selectize
-            size: large
-            label: PLUGIN_ADMIN.UPLOADS_DANGEROUS_EXTENSIONS
-            help: PLUGIN_ADMIN.UPLOADS_DANGEROUS_EXTENSIONS_HELP
-            classes: fancy
+            type: selectize  # 定义为多选字段，支持动态输入
+            size: large  # 输入框大小为大号
+            label: PLUGIN_ADMIN.UPLOADS_DANGEROUS_EXTENSIONS  # 标签：危险文件扩展名
+            help: PLUGIN_ADMIN.UPLOADS_DANGEROUS_EXTENSIONS_HELP  # 帮助信息：描述危险扩展名的作用
+            classes: fancy  # 应用自定义样式类，增强视觉效果
             validate:
-                type: commalist
-
+                type: commalist  # 验证为逗号分隔的值，例如多种扩展名
 
         sanitize_svg:
-            type: toggle
-            label: PLUGIN_ADMIN.SANITIZE_SVG
-            help: PLUGIN_ADMIN.SANITIZE_SVG_HELP
-            highlight: 1
-            options:
-                1: PLUGIN_ADMIN.YES
-                0: PLUGIN_ADMIN.NO
-            default: true
+            type: toggle  # 定义为切换按钮类型
+            label: PLUGIN_ADMIN.SANITIZE_SVG  # 标签：清理 SVG 文件
+            help: PLUGIN_ADMIN.SANITIZE_SVG_HELP  # 帮助信息：描述清理 SVG 的功能
+            highlight: 1  # 高亮默认选项
+            options:  # 可选项
+                1: PLUGIN_ADMIN.YES  # 选项：是
+                0: PLUGIN_ADMIN.NO  # 选项：否
+            default: true  # 默认值：启用
             validate:
-                type: bool
+                type: bool  # 验证为布尔值
+
+# 额外注释：
+# 1. 此配置文件主要用于管理 Grav CMS 的安全功能。
+# 2. XSS 防护部分用于保护系统免受跨站脚本攻击。
+# 3. 危险协议和标签可以通过白名单或黑名单机制进行限制。
+# 4. 上传安全部分主要防止用户上传潜在危险的文件类型。
+# 5. `sanitize_svg` 可清理 SVG 文件，避免可能嵌入的恶意代码。

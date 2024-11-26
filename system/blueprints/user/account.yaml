@@ -1,157 +1,154 @@
-title: Account
+title: 帐户  # 配置标题：账户设置
 form:
-    validation: loose
+    validation: loose  # 验证模式为宽松
 
     fields:
 
-        info:
-            type: userinfo
-            size: large
+        info:  # 用户信息
+            type: userinfo  # 用户信息字段类型
+            size: large  # 输入框大小为大
 
-        avatar:
-            type: file
-            size: large
-            destination: 'account://avatars'
-            multiple: false
-            random_name: true
+        avatar:  # 头像上传
+            type: file  # 文件上传类型
+            size: large  # 输入框大小为大
+            destination: 'account://avatars'  # 文件存储路径
+            multiple: false  # 不允许多文件上传
+            random_name: true  # 文件名随机生成
 
-        multiavatar_only:
-          type: conditional
-          condition: config.system.accounts.avatar == 'multiavatar'
+        multiavatar_only:  # 条件字段，仅当配置为 Multiavatar 时显示
+          type: conditional  # 条件字段
+          condition: config.system.accounts.avatar == 'multiavatar'  # 条件：头像类型为 Multiavatar
           fields:
-            avatar_hash:
-                type: text
-                label: ''
-                placeholder: 'e.g. dceaadcfda491f4e45'
-                description: PLUGIN_ADMIN.AVATAR_HASH
-                size: large
+            avatar_hash:  # Multiavatar 哈希字段
+                type: text  # 文本输入类型
+                label: ''  # 标签为空
+                placeholder: 'e.g. dceaadcfda491f4e45'  # 占位符示例
+                description: PLUGIN_ADMIN.AVATAR_HASH  # 描述：头像哈希值
+                size: large  # 输入框大小为大
 
-        content:
-            type: section
-            title: PLUGIN_ADMIN.ACCOUNT
-            underline: true
+        content:  # 账户部分
+            type: section  # 定义为部分
+            title: PLUGIN_ADMIN.ACCOUNT  # 标题：账户
+            underline: true  # 添加下划线分隔
 
-        username:
-            type: text
-            size: large
-            label: PLUGIN_ADMIN.USERNAME
-            disabled: true
-            readonly: true
+        username:  # 用户名字段
+            type: text  # 文本输入类型
+            size: large  # 输入框大小为大
+            label: PLUGIN_ADMIN.USERNAME  # 标签：用户名
+            disabled: true  # 禁用字段
+            readonly: true  # 只读字段
 
-        email:
-            type: email
-            size: large
-            label: PLUGIN_ADMIN.EMAIL
+        email:  # 邮箱字段
+            type: email  # 邮箱输入类型
+            size: large  # 输入框大小为大
+            label: PLUGIN_ADMIN.EMAIL  # 标签：邮箱
             validate:
-              type: email
-              message: PLUGIN_ADMIN.EMAIL_VALIDATION_MESSAGE
-              required: true
+              type: email  # 验证为邮箱
+              message: PLUGIN_ADMIN.EMAIL_VALIDATION_MESSAGE  # 验证失败消息
+              required: true  # 必填字段
 
-        password:
-            type: password
-            size: large
-            label: PLUGIN_ADMIN.PASSWORD
-            autocomplete: new-password
+        password:  # 密码字段
+            type: password  # 密码输入类型
+            size: large  # 输入框大小为大
+            label: PLUGIN_ADMIN.PASSWORD  # 标签：密码
+            autocomplete: new-password  # 自动填充类型为新密码
             validate:
-              required: false
-              message: PLUGIN_ADMIN.PASSWORD_VALIDATION_MESSAGE
-              config-pattern@: system.pwd_regex
+              required: false  # 非必填
+              message: PLUGIN_ADMIN.PASSWORD_VALIDATION_MESSAGE  # 验证失败消息
+              config-pattern@: system.pwd_regex  # 使用系统密码正则验证
 
-        fullname:
-            type: text
-            size: large
-            label: PLUGIN_ADMIN.FULL_NAME
+        fullname:  # 全名字段
+            type: text  # 文本输入类型
+            size: large  # 输入框大小为大
+            label: PLUGIN_ADMIN.FULL_NAME  # 标签：全名
             validate:
-              required: true
+              required: true  # 必填字段
 
-        title:
-            type: text
-            size: large
-            label: PLUGIN_ADMIN.TITLE
+        title:  # 职位字段
+            type: text  # 文本输入类型
+            size: large  # 输入框大小为大
+            label: PLUGIN_ADMIN.TITLE  # 标签：职位
 
-        language:
-            type: select
-            label: PLUGIN_ADMIN.LANGUAGE
-            size: medium
-            classes: fancy
-            data-options@: '\Grav\Plugin\Admin\Admin::adminLanguages'
-            default: 'en'
-            help: PLUGIN_ADMIN.LANGUAGE_HELP
+        language:  # 语言字段
+            type: select  # 下拉选择类型
+            label: PLUGIN_ADMIN.LANGUAGE  # 标签：语言
+            size: medium  # 输入框大小为中等
+            classes: fancy  # 样式为 fancy
+            data-options@: '\Grav\Plugin\Admin\Admin::adminLanguages'  # 动态加载语言选项
+            default: 'en'  # 默认值为英文
+            help: PLUGIN_ADMIN.LANGUAGE_HELP  # 帮助信息
 
-        content_editor:
-            type: select
-            label: PLUGIN_ADMIN.CONTENT_EDITOR
-            size: medium
-            classes: fancy
-            data-options@: 'Grav\Plugin\Admin\Admin::contentEditor'
-            default: 'default'
-            help: PLUGIN_ADMIN.CONTENT_EDITOR_HELP
+        content_editor:  # 内容编辑器字段
+            type: select  # 下拉选择类型
+            label: PLUGIN_ADMIN.CONTENT_EDITOR  # 标签：内容编辑器
+            size: medium  # 输入框大小为中等
+            classes: fancy  # 样式为 fancy
+            data-options@: 'Grav\Plugin\Admin\Admin::contentEditor'  # 动态加载编辑器选项
+            default: 'default'  # 默认值
+            help: PLUGIN_ADMIN.CONTENT_EDITOR_HELP  # 帮助信息
 
-        twofa_check:
-            type: conditional
-            condition: config.plugins.admin.twofa_enabled
+        twofa_check:  # 双重验证部分
+            type: conditional  # 条件字段
+            condition: config.plugins.admin.twofa_enabled  # 条件：启用双重验证
 
             fields:
 
-                twofa:
-                    title: PLUGIN_ADMIN.2FA_TITLE
-                    type: section
-                    underline: true
+                twofa:  # 双重验证设置标题
+                    title: PLUGIN_ADMIN.2FA_TITLE  # 标题：双重验证
+                    type: section  # 定义为部分
+                    underline: true  # 添加下划线分隔
 
-                twofa_enabled:
-                    type: toggle
-                    label: PLUGIN_ADMIN.2FA_ENABLED
-                    classes: twofa-toggle
-                    highlight: 1
-                    default: 0
-                    options:
-                      1: PLUGIN_ADMIN.YES
-                      0: PLUGIN_ADMIN.NO
+                twofa_enabled:  # 启用双重验证
+                    type: toggle  # 开关类型
+                    label: PLUGIN_ADMIN.2FA_ENABLED  # 标签：启用双重验证
+                    classes: twofa-toggle  # 样式类
+                    highlight: 1  # 默认高亮选项
+                    default: 0  # 默认值为禁用
+                    options:  # 开关选项
+                      1: PLUGIN_ADMIN.YES  # 是
+                      0: PLUGIN_ADMIN.NO  # 否
                     validate:
-                      type: bool
+                      type: bool  # 验证为布尔值
 
+                twofa_secret:  # 双重验证密钥
+                    type: 2fa_secret  # 密钥输入类型
+                    outerclasses: 'twofa-secret'  # 外部样式类
+                    markdown: true  # 支持 Markdown
+                    label: PLUGIN_ADMIN.2FA_SECRET  # 标签：密钥
+                    sublabel: PLUGIN_ADMIN.2FA_SECRET_HELP  # 子标签：密钥帮助
 
-                twofa_secret:
-                    type: 2fa_secret
-                    outerclasses: 'twofa-secret'
-                    markdown: true
-                    label: PLUGIN_ADMIN.2FA_SECRET
-                    sublabel: PLUGIN_ADMIN.2FA_SECRET_HELP
+                yubikey_id:  # YubiKey ID
+                    type: text  # 文本输入类型
+                    label: PLUGIN_ADMIN.YUBIKEY_ID  # 标签：YubiKey ID
+                    description: PLUGIN_ADMIN.YUBIKEY_HELP  # 描述信息
+                    size: small  # 输入框大小为小
+                    maxlength: 12  # 最大长度为 12
 
-                yubikey_id:
-                    type: text
-                    label: PLUGIN_ADMIN.YUBIKEY_ID
-                    description: PLUGIN_ADMIN.YUBIKEY_HELP
-                    size: small
-                    maxlength: 12
-
-
-
-        security:
-            security@: admin.super
-            title: PLUGIN_ADMIN.ACCESS_LEVELS
-            type: section
-            underline: true
+        security:  # 安全权限部分
+            security@: admin.super  # 仅超级管理员可访问
+            title: PLUGIN_ADMIN.ACCESS_LEVELS  # 标题：访问级别
+            type: section  # 定义为部分
+            underline: true  # 添加下划线分隔
 
             fields:
-                groups:
-                    security@: admin.super
-                    type: select
-                    multiple: true
-                    size: large
-                    label: PLUGIN_ADMIN.GROUPS
-                    data-options@: '\Grav\Common\User\Group::groupNames'
-                    classes: fancy
-                    help: PLUGIN_ADMIN.GROUPS_HELP
+                groups:  # 用户组字段
+                    security@: admin.super  # 仅超级管理员可访问
+                    type: select  # 下拉选择类型
+                    multiple: true  # 支持多选
+                    size: large  # 输入框大小为大
+                    label: PLUGIN_ADMIN.GROUPS  # 标签：用户组
+                    data-options@: '\Grav\Common\User\Group::groupNames'  # 动态加载用户组选项
+                    classes: fancy  # 样式为 fancy
+                    help: PLUGIN_ADMIN.GROUPS_HELP  # 帮助信息
                     validate:
-                        type: commalist
+                        type: commalist  # 验证为逗号分隔列表
 
-                access:
-                    security@: admin.super
-                    type: permissions
-                    check_authorize: true
-                    label: PLUGIN_ADMIN.PERMISSIONS
-                    ignore_empty: true
+                access:  # 权限字段
+                    security@: admin.super  # 仅超级管理员可访问
+                    type: permissions  # 权限类型字段
+                    check_authorize: true  # 启用权限检查
+                    label: PLUGIN_ADMIN.PERMISSIONS  # 标签：权限
+                    ignore_empty: true  # 忽略空值
                     validate:
-                        type: array
-                        value_type: bool
+                        type: array  # 验证为数组
+                        value_type: bool  # 数组值类型为布尔值

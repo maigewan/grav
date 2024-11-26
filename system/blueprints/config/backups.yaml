@@ -1,4 +1,4 @@
-title: PLUGIN_ADMIN.BACKUPS
+title: plugin_admin.备份
 
 form:
     validation: loose
@@ -7,119 +7,118 @@ form:
         history_title:
             type: section
             title: PLUGIN_ADMIN.BACKUPS_HISTORY
-            underline: true
+            underline: true # 添加下划线样式，分隔历史备份的部分
 
         history:
-            type: backupshistory
+            type: backupshistory # 定义一个自定义类型，用于显示备份历史记录
 
         config_title:
             type: section
             title: PLUGIN_ADMIN.BACKUPS_PURGE_CONFIG
-            underline: true
+            underline: true # 添加下划线样式，分隔清理配置部分
 
         purge.trigger:
             type: select
-            label: PLUGIN_ADMIN.BACKUPS_STORAGE_PURGE_TRIGGER
-            size: medium
-            default: space
-            options:
-                space: Maximum Backup Space
-                number: Maximum Number of Backups
-                time: maximum Retention Time
+            label: PLUGIN_ADMIN.BACKUPS_STORAGE_PURGE_TRIGGER # 配置清理触发方式的标签
+            size: medium # 配置下拉菜单的尺寸
+            default: space # 默认触发条件为存储空间限制
+            options: # 提供可选项
+                space: 最大备份空间 # 以最大备份空间为触发条件
+                number: 最大备份数量 # 以最大备份数量为触发条件
+                time: 最大保留时间 # 以最大保留时间为触发条件
             validate:
-                required: true
+                required: true # 此选项为必填
 
         purge.max_backups_count:
             type: number
-            label: PLUGIN_ADMIN.BACKUPS_MAX_COUNT
-            default: 25
-            size: x-small
-            help: PLUGIN_ADMIN.BACKUPS_MAX_COUNT
+            label: PLUGIN_ADMIN.BACKUPS_MAX_COUNT # 配置最大备份数量的标签
+            default: 25 # 默认最大备份数量为25
+            size: x-small # 字段大小为较小样式
+            help: PLUGIN_ADMIN.BACKUPS_MAX_COUNT # 提供字段的帮助说明
             validate:
-                min: 0
-                type: number
-                required: true
-                message: Must be a number 0 or greater
+                min: 0 # 最小值为0
+                type: number # 验证数据类型为数字
+                required: true # 此字段为必填
+                message: Must be a number 0 or greater # 如果验证失败，显示的错误信息
 
         purge.max_backups_space:
             type: number
-            label: PLUGIN_ADMIN.BACKUPS_MAX_SPACE
-            append: in GB
-            size: x-small
-            default: 5
+            label: PLUGIN_ADMIN.BACKUPS_MAX_SPACE # 配置最大备份空间的标签
+            append: in GB # 在字段值后显示单位GB
+            size: x-small # 字段大小为较小样式
+            default: 5 # 默认最大备份空间为5GB
             validate:
-                min: 1
-                type: number
-                required: true
-                message: Space must be 1GB or greater
+                min: 1 # 最小值为1GB
+                type: number # 验证数据类型为数字
+                required: true # 此字段为必填
+                message: Space must be 1GB or greater # 如果验证失败，显示的错误信息
 
         purge.max_backups_time:
             type: number
-            label: PLUGIN_ADMIN.BACKUPS_MAX_RETENTION_TIME
-            append: PLUGIN_ADMIN.BACKUPS_MAX_RETENTION_TIME_APPEND
-            size: x-small
-            default: 365
+            label: PLUGIN_ADMIN.BACKUPS_MAX_RETENTION_TIME # 配置最大保留时间的标签
+            append: PLUGIN_ADMIN.BACKUPS_MAX_RETENTION_TIME_APPEND # 提供额外说明的附加内容
+            size: x-small # 字段大小为较小样式
+            default: 365 # 默认最大保留时间为365天
             validate:
-                min: 7
-                type: number
-                required: true
-                message: Rentenion days must be 7 or greater
+                min: 7 # 最小值为7天
+                type: number # 验证数据类型为数字
+                required: true # 此字段为必填
+                message: 保留天数必须为 7 天或更长 # 如果验证失败，显示的错误信息
 
         profiles_title:
           type: section
-          title: PLUGIN_ADMIN.BACKUPS_PROFILES
-          underline: true
+          title: PLUGIN_ADMIN.BACKUPS_PROFILES # 定义备份配置的标题
+          underline: true # 添加下划线样式
 
         profiles:
           type: list
-          style: vertical
-          label:
-          classes: backups-list compact
-          sort: false
+          style: vertical # 列表样式为垂直排列
+          label: # 列表标签为空，未定义具体描述
+          classes: backups-list compact # 为列表添加样式类，显示为紧凑样式
+          sort: false # 禁用列表的拖动排序功能
 
           fields:
             .name:
               type: text
-              label: PLUGIN_ADMIN.NAME
-              placeholder: PLUGIN_ADMIN.BACKUPS_PROFILE_NAME
+              label: PLUGIN_ADMIN.NAME # 配置备份配置名称的标签
+              placeholder: PLUGIN_ADMIN.BACKUPS_PROFILE_NAME # 输入框的占位符
               validate:
-                  max: 20
-                  message: 'Name must be less than 20 characters'
-                  required: true
+                  max: 20 # 名称最长20个字符
+                  message: '名称必须少于 20 个字符' # 如果验证失败，显示的错误信息
+                  required: true # 此字段为必填
             .root:
               type: text
-              label: PLUGIN_ADMIN.BACKUPS_PROFILE_ROOT_FOLDER
-              help: PLUGIN_ADMIN.BACKUPS_PROFILE_ROOT_FOLDER_HELP
-              placeholder: '/'
-              default: '/'
+              label: PLUGIN_ADMIN.BACKUPS_PROFILE_ROOT_FOLDER # 配置备份根目录的标签
+              help: PLUGIN_ADMIN.BACKUPS_PROFILE_ROOT_FOLDER_HELP # 提供字段的帮助说明
+              placeholder: '/' # 输入框的占位符，默认值为 '/'
+              default: '/' # 默认备份目录为根目录
               validate:
-                  required: true
+                  required: true # 此字段为必填
             .exclude_paths:
               type: textarea
-              label: PLUGIN_ADMIN.BACKUPS_PROFILE_EXCLUDE_PATHS
-              rows: 5
-              placeholder: "/backup\r/cache\r/images\r/logs\r/tmp"
-              help: PLUGIN_ADMIN.BACKUPS_PROFILE_EXCLUDE_PATHS_HELP
+              label: PLUGIN_ADMIN.BACKUPS_PROFILE_EXCLUDE_PATHS # 配置需要排除的路径标签
+              rows: 5 # 文本域行数为5
+              placeholder: "/backup\r/cache\r/images\r/logs\r/tmp" # 默认排除路径的占位符，示例多个目录
+              help: PLUGIN_ADMIN.BACKUPS_PROFILE_EXCLUDE_PATHS_HELP # 提供字段的帮助说明
             .exclude_files:
                 type: textarea
-                label: PLUGIN_ADMIN.BACKUPS_PROFILE_EXCLUDE_FILES
-                rows: 5
-                placeholder: ".DS_Store\r.git\r.svn\r.hg\r.idea\r.vscode\rnode_modules"
-                help: PLUGIN_ADMIN.BACKUPS_PROFILE_EXCLUDE_FILES_HELP
+                label: PLUGIN_ADMIN.BACKUPS_PROFILE_EXCLUDE_FILES # 配置需要排除的文件标签
+                rows: 5 # 文本域行数为5
+                placeholder: ".DS_Store\r.git\r.svn\r.hg\r.idea\r.vscode\rnode_modules" # 默认排除文件的占位符，示例多种文件
+                help: PLUGIN_ADMIN.BACKUPS_PROFILE_EXCLUDE_FILES_HELP # 提供字段的帮助说明
             .schedule:
                 type: toggle
-                label: PLUGIN_ADMIN.BACKUPS_PROFILE_SCHEDULE
-                highlight: 1
-                default: 1
+                label: PLUGIN_ADMIN.BACKUPS_PROFILE_SCHEDULE # 配置备份计划的开关
+                highlight: 1 # 默认高亮选项为启用
+                default: 1 # 默认值为启用
                 options:
-                    1: PLUGIN_ADMIN.YES
-                    0: PLUGIN_ADMIN.NO
+                    1: PLUGIN_ADMIN.YES # 选项值为1时，显示“是”
+                    0: PLUGIN_ADMIN.NO # 选项值为0时，显示“否”
                 validate:
-                    type: bool
+                    type: bool # 验证数据类型为布尔值
             .schedule_at:
                 type: cron
-                label: PLUGIN_ADMIN.BACKUPS_PROFILE_SCHEDULE_AT
-                default: '* 3 * * *'
+                label: PLUGIN_ADMIN.BACKUPS_PROFILE_SCHEDULE_AT # 配置计划运行时间的标签
+                default: '* 3 * * *' # 默认时间表达式为每天凌晨3点
                 validate:
-                    required: true
-
+                    required: true # 此字段为必填

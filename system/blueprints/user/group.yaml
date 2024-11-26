@@ -1,55 +1,57 @@
-title: Group
-rules:
-  slug:
-    pattern: '[a-zA-Zа-яA-Я0-9_\-]+'
-    min: 1
-    max: 200
+title: 团体  # 配置标题：用户组
 
-form:
-  validation: loose
+rules:  # 验证规则
+  slug:  # 定义 slug 验证规则
+    pattern: '[a-zA-Zа-яA-Я0-9_\-]+'  # 允许的字符：字母、数字、下划线和连字符
+    min: 1  # 最少 1 个字符
+    max: 200  # 最多 200 个字符
+
+form:  # 表单设置
+  validation: loose  # 验证模式为宽松
 
   fields:
-    groupname:
-      type: text
-      size: large
-      label: PLUGIN_ADMIN.GROUP_NAME
-      flex-disabled@: exists
-      flex-readonly@: exists
+
+    groupname:  # 用户组名称字段
+      type: text  # 文本输入类型
+      size: large  # 输入框大小为大
+      label: PLUGIN_ADMIN.GROUP_NAME  # 标签：用户组名称
+      flex-disabled@: exists  # 如果已存在，则禁用字段
+      flex-readonly@: exists  # 如果已存在，则设置字段为只读
       validate:
-        required: true
-        rule: slug
+        required: true  # 验证为必填字段
+        rule: slug  # 使用 slug 验证规则
 
-    readableName:
-      type: text
-      size: large
-      label: PLUGIN_ADMIN.DISPLAY_NAME
+    readableName:  # 可读名称字段
+      type: text  # 文本输入类型
+      size: large  # 输入框大小为大
+      label: PLUGIN_ADMIN.DISPLAY_NAME  # 标签：显示名称
 
-    description:
-      type: text
-      size: large
-      label: PLUGIN_ADMIN.DESCRIPTION
+    description:  # 描述字段
+      type: text  # 文本输入类型
+      size: large  # 输入框大小为大
+      label: PLUGIN_ADMIN.DESCRIPTION  # 标签：描述
 
-    icon:
-      type: text
-      size: small
-      label: PLUGIN_ADMIN.ICON
+    icon:  # 图标字段
+      type: text  # 文本输入类型
+      size: small  # 输入框大小为小
+      label: PLUGIN_ADMIN.ICON  # 标签：图标
 
-    enabled:
-      type: toggle
-      label: PLUGIN_ADMIN.ENABLED
-      highlight: 1
-      default: 1
-      options:
-        1: PLUGIN_ADMIN.YES
-        0: PLUGIN_ADMIN.NO
+    enabled:  # 启用字段
+      type: toggle  # 开关类型
+      label: PLUGIN_ADMIN.ENABLED  # 标签：启用
+      highlight: 1  # 默认高亮选项
+      default: 1  # 默认值为启用
+      options:  # 开关选项
+        1: PLUGIN_ADMIN.YES  # 是
+        0: PLUGIN_ADMIN.NO  # 否
       validate:
-        type: bool
+        type: bool  # 验证为布尔值
 
-    access:
-      type: permissions
-      check_authorize: false
-      label: PLUGIN_ADMIN.PERMISSIONS
-      ignore_empty: true
+    access:  # 访问权限字段
+      type: permissions  # 权限类型字段
+      check_authorize: false  # 禁用授权检查
+      label: PLUGIN_ADMIN.PERMISSIONS  # 标签：权限
+      ignore_empty: true  # 忽略空值
       validate:
-        type: array
-        value_type: bool
+        type: array  # 验证为数组
+        value_type: bool  # 数组值类型为布尔值

@@ -1,67 +1,66 @@
 form:
   fields:
-    _site:
-      type: section
-      title: PLUGIN_ADMIN.PAGE_ACCESS
-      underline: true
+    _site:  # 页面访问设置部分
+      type: section  # 定义为部分
+      title: PLUGIN_ADMIN.PAGE_ACCESS  # 标题：页面访问
+      underline: true  # 添加下划线分隔
 
-      fields:
+      fields:  # 字段设置
 
-        header.login.visibility_requires_access:
-          type: toggle
-          toggleable: true
-          label: PLUGIN_ADMIN.PAGE_VISIBILITY_REQUIRES_ACCESS
-          help: PLUGIN_ADMIN.PAGE_VISIBILITY_REQUIRES_ACCESS_HELP
-          highlight: 0
-          options:
-            1: PLUGIN_ADMIN.YES
-            0: PLUGIN_ADMIN.NO
+        header.login.visibility_requires_access:  # 页面可见性需要访问权限
+          type: toggle  # 开关类型
+          toggleable: true  # 允许动态切换
+          label: PLUGIN_ADMIN.PAGE_VISIBILITY_REQUIRES_ACCESS  # 标签：页面可见性需要访问权限
+          help: PLUGIN_ADMIN.PAGE_VISIBILITY_REQUIRES_ACCESS_HELP  # 帮助信息
+          highlight: 0  # 默认值为禁用
+          options:  # 开关选项
+            1: PLUGIN_ADMIN.YES  # 是
+            0: PLUGIN_ADMIN.NO  # 否
           validate:
-            type: bool
+            type: bool  # 验证为布尔值
 
-
-        header.access:
-          type: acl_picker
-          label: PLUGIN_ADMIN.PAGE_ACCESS
-          help: PLUGIN_ADMIN.PAGE_ACCESS_HELP
-          ignore_empty: true
-          data_type: access
+        header.access:  # 页面访问权限
+          type: acl_picker  # 访问控制列表选择器
+          label: PLUGIN_ADMIN.PAGE_ACCESS  # 标签：页面访问权限
+          help: PLUGIN_ADMIN.PAGE_ACCESS_HELP  # 帮助信息
+          ignore_empty: true  # 忽略空值
+          data_type: access  # 数据类型为访问控制
           validate:
-            type: array
-            value_type: bool
+            type: array  # 验证为数组
+            value_type: bool  # 数组值类型为布尔值
 
-    _admin:
-      security@: {or: [admin.super, admin.configuration.pages]}
-      type: section
-      title: PLUGIN_ADMIN.PAGE PERMISSIONS
-      underline: true
+    _admin:  # 页面权限设置部分
+      security@: {or: [admin.super, admin.configuration.pages]}  # 需要超级管理员或页面配置权限
+      type: section  # 定义为部分
+      title: PLUGIN_ADMIN.PAGE PERMISSIONS  # 标题：页面权限
+      underline: true  # 添加下划线分隔
 
-      fields:
+      fields:  # 字段设置
 
-        header.permissions.inherit:
-          type: toggle
-          toggleable: true
-          label: PLUGIN_ADMIN.PAGE_INHERIT_PERMISSIONS
-          help: PLUGIN_ADMIN.PAGE_INHERIT_PERMISSIONS_HELP
-          highlight: 1
-          options:
-            1: PLUGIN_ADMIN.YES
-            0: PLUGIN_ADMIN.NO
+        header.permissions.inherit:  # 继承权限
+          type: toggle  # 开关类型
+          toggleable: true  # 允许动态切换
+          label: PLUGIN_ADMIN.PAGE_INHERIT_PERMISSIONS  # 标签：继承权限
+          help: PLUGIN_ADMIN.PAGE_INHERIT_PERMISSIONS_HELP  # 帮助信息
+          highlight: 1  # 默认值为启用
+          options:  # 开关选项
+            1: PLUGIN_ADMIN.YES  # 是
+            0: PLUGIN_ADMIN.NO  # 否
           validate:
-            type: bool
+            type: bool  # 验证为布尔值
 
-        header.permissions.authors:
-          type: array
-          toggleable: true
-          value_only: true
-          placeholder_value: PLUGIN_ADMIN.USERNAME
-          label: PLUGIN_ADMIN.PAGE_AUTHORS
-          help: PLUGIN_ADMIN.PAGE_AUTHORS_HELP
+        header.permissions.authors:  # 页面作者
+          type: array  # 数组类型
+          toggleable: true  # 允许动态切换
+          value_only: true  # 仅输入值
+          placeholder_value: PLUGIN_ADMIN.USERNAME  # 占位符：用户名
+          label: PLUGIN_ADMIN.PAGE_AUTHORS  # 标签：页面作者
+          help: PLUGIN_ADMIN.PAGE_AUTHORS_HELP  # 帮助信息
 
-        header.permissions.groups:
-          ignore@: true
-          type: acl_picker
-          label: PLUGIN_ADMIN.PAGE_GROUPS
-          help: PLUGIN_ADMIN.PAGE_GROUPS_HELP
-          ignore_empty: true
-          data_type: permissions
+        header.permissions.groups:  # 页面组权限
+          ignore@: true  # 忽略字段设置
+          type: acl_picker  # 访问控制列表选择器
+          label: PLUGIN_ADMIN.PAGE_GROUPS  # 标签：页面组
+          help: PLUGIN_ADMIN.PAGE_GROUPS_HELP  # 帮助信息
+          ignore_empty: true  # 忽略空值
+          data_type: permissions  # 数据类型为权限

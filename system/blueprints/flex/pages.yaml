@@ -1,188 +1,142 @@
-title: Pages
-description: Manage your Grav Pages in Flex.
-type: flex-objects
+title: 页面  # 配置标题：页面管理
+description: 在 Flex 中管理您的 Grav Pages。  # 描述信息：在 Flex 中管理 Grav 页面
+type: flex-objects  # 定义类型为 Flex 对象
 
-# Extends a page (blueprint gets overridden inside the object)
+# 此文件扩展了页面设置（蓝图在对象中会被覆盖）
 extends@:
-  type: default
-  context: blueprints://pages
+  type: default  # 基于默认类型
+  context: blueprints://pages  # 设置上下文路径为蓝图中的 pages
 
 #
-# HIGHLY SPECIALIZED FLEX TYPE, AVOID USING PAGES AS BASE FOR YOUR OWN TYPE.
+# 高度专用的 Flex 类型，请勿将页面用作自定义类型的基础。
 #
 
-# Flex configuration
+# Flex 配置
 config:
-  # Administration Configuration (needs Flex Objects plugin)
+  # 后台管理配置（需要安装 Flex Objects 插件）
   admin:
-    # Admin router
+    # 后台路由设置
     router:
-      path: '/pages'
+      path: '/pages'  # 设置页面管理的路径为 `/pages`
 
-    # Permissions
+    # 权限设置
     permissions:
-      # Primary permissions
+      # 主权限
       admin.pages:
-        type: crudl
-        label: Pages
+        type: crudl  # 提供增删改查及列出操作权限
+        label: Pages  # 标签：页面
       admin.configuration.pages:
-        type: default
-        label: Pages Configuration
+        type: default  # 默认类型权限
+        label: Pages Configuration  # 标签：页面配置
 
-    # Admin menu
+    # 后台菜单设置
     menu:
       list:
-        route: '/pages'
-        title: PLUGIN_ADMIN.PAGES
-        icon: fa-file-text
-        authorize: ['admin.pages.list', 'admin.super']
-        priority: 5
+        route: '/pages'  # 设置菜单路由为 `/pages`
+        title: PLUGIN_ADMIN.PAGES  # 菜单标题：页面
+        icon: fa-file-text  # 菜单图标
+        authorize: ['admin.pages.list', 'admin.super']  # 菜单授权，要求列出页面权限或超级管理员权限
+        priority: 5  # 菜单优先级
 
-    # Admin template type (folder)
-    template: pages
+    # 后台模板类型（文件夹）
+    template: pages  # 模板类型为 pages
 
-    # Allowed admin actions
+    # 允许的后台操作
     actions:
-      list: true
-      create: true
-      read: true
-      update: true
-      delete: true
+      list: true  # 启用列出操作
+      create: true  # 启用创建操作
+      read: true  # 启用读取操作
+      update: true  # 启用更新操作
+      delete: true  # 启用删除操作
 
-    # List view
+    # 列表视图配置
     list:
-      # Fields shown in the list view
+      # 列表视图中显示的字段
       fields:
         published:
-          width: 8
-          alias: header.published
+          width: 8  # 宽度比例为 8
+          alias: header.published  # 别名映射到页面头部的 published 字段
         visible:
           width: 8
           field:
-            label: Visible
-            type: toggle
+            label: Visible  # 标签：可见性
+            type: toggle  # 切换类型
         menu:
-          link: edit
-          alias: header.menu
+          link: edit  # 显示为编辑链接
+          alias: header.menu  # 别名映射到页面头部的菜单字段
         full_route:
           field:
-            label: Route
-            type: text
-          link: edit
+            label: Route  # 标签：路径
+            type: text  # 文本类型
+          link: edit  # 显示为编辑链接
           sort:
-            field: key
+            field: key  # 按键排序
         name:
           width: 8
           field:
-            label: Type
-            type: text
+            label: Type  # 标签：类型
+            type: text  # 文本类型
         translations:
           width: 8
           field:
-            label: Translations
-            type: text
-#        updated_date:
-#          alias: header.update_date
+            label: Translations  # 标签：翻译
+            type: text  # 文本类型
 
-      # Extra options
+      # 额外选项
       options:
-        # Default number of records for pagination
-        per_page: 20
-        # Default ordering
-        order:
-          by: key
-          dir: asc
+        per_page: 20  # 每页记录数
+        order:  # 默认排序方式
+          by: key  # 按键排序
+          dir: asc  # 升序
 
-      # TODO: not used yet
-      buttons:
-        back:
-          icon: reply
-          title: PLUGIN_ADMIN.BACK
-        add:
-          icon: plus
-          label: PLUGIN_ADMIN.ADD
-
+    # 编辑视图配置
     edit:
       title:
         template: "{% if object.root %}Root <small>( &lt;root&gt; )</small>{% else %}{{ (form.value('header.title') ?? form.value('folder'))|e }} <small>( {{ (object.getRoute().toString(false) ?: '/')|e }} )</small>{% endif %}"
 
-      # TODO: not used yet
-      buttons:
-        back:
-          icon: reply
-          title: PLUGIN_ADMIN.BACK
-        preview:
-          icon: eye
-          title: PLUGIN_ADMIN.PREVIEW
-        add:
-          icon: plus
-          label: PLUGIN_ADMIN.ADD
-        copy:
-          icon: copy
-          label: PLUGIN_ADMIN.COPY
-        move:
-          icon: arrows
-          label: PLUGIN_ADMIN.MOVE
-        delete:
-          icon: close
-          label: PLUGIN_ADMIN.DELETE
-        save:
-          icon: check
-          label: PLUGIN_ADMIN.SAVE
-
-    # Preview View
+    # 预览视图
     preview:
-      enabled: true
+      enabled: true  # 启用预览功能
 
-    # Configure view
+    # 配置视图
     configure:
-      authorize: 'admin.configuration.pages'
+      authorize: 'admin.configuration.pages'  # 配置视图需要页面配置权限
 
-  # Site Configuration
+  # 站点配置
   site:
-    # Hide from flex types
-    hidden: true
+    hidden: true  # 在 Flex 类型中隐藏
     templates:
       collection:
-        # Lookup for the template layout files for collections of objects
-        paths:
+        paths:  # 集合模板路径
           - 'flex/{TYPE}/collection/{LAYOUT}{EXT}'
       object:
-        # Lookup for the template layout files for objects
-        paths:
+        paths:  # 对象模板路径
           - 'flex/{TYPE}/object/{LAYOUT}{EXT}'
       defaults:
-        # Default template {TYPE}; overridden by filename of this blueprint if template folder exists
-        type: pages
-        # Default template {LAYOUT}; can be overridden in render calls (usually Twig in templates)
-        layout: default
+        type: pages  # 默认模板类型为 pages
+        layout: default  # 默认布局为 default
 
-    # Default filters for frontend.
-    filter:
+    filter:  # 前端的默认过滤器
       - withPublished
 
-  # Data Configuration
+  # 数据配置
   data:
-    object: 'Grav\Common\Flex\Types\Pages\PageObject'
-    collection: 'Grav\Common\Flex\Types\Pages\PageCollection'
-    index: 'Grav\Common\Flex\Types\Pages\PageIndex'
+    object: 'Grav\Common\Flex\Types\Pages\PageObject'  # 使用页面对象类
+    collection: 'Grav\Common\Flex\Types\Pages\PageCollection'  # 使用页面集合类
+    index: 'Grav\Common\Flex\Types\Pages\PageIndex'  # 使用页面索引类
     storage:
-      class: 'Grav\Common\Flex\Types\Pages\Storage\PageStorage'
+      class: 'Grav\Common\Flex\Types\Pages\Storage\PageStorage'  # 使用页面存储类
       options:
         formatter:
-          class: 'Grav\Framework\File\Formatter\MarkdownFormatter'
-        folder: 'page://'
-        # Keep index file in filesystem to speed up lookups
-        indexed: true
-    # Set default ordering of the pages
-    ordering:
-      storage_key: ASC
-    search:
-       # Search options
+          class: 'Grav\Framework\File\Formatter\MarkdownFormatter'  # 使用 Markdown 格式化器
+        folder: 'page://'  # 存储文件夹路径
+        indexed: true  # 启用索引以加快查询速度
+    ordering:  # 默认排序
+      storage_key: ASC  # 按存储键升序
+    search:  # 搜索配置
       options:
-        contains: 1
-      # Fields to be searched
-      fields:
+        contains: 1  # 搜索模式包含部分匹配
+      fields:  # 可搜索的字段
         - key
         - slug
         - menu
@@ -192,21 +146,21 @@ blueprints:
   configure:
     fields:
       import@:
-        type: configure/compat
-        context: blueprints://flex
+        type: configure/compat  # 导入兼容配置
+        context: blueprints://flex  # 设置上下文路径
 
-# Regular form definition
+# 常规表单定义
 form:
   fields:
     lang:
-      type: hidden
-      value: ''
+      type: hidden  # 隐藏字段
+      value: ''  # 默认值为空
 
     tabs:
       fields:
         security:
-          type: tab
-          title: PLUGIN_ADMIN.SECURITY
+          type: tab  # 定义为选项卡
+          title: PLUGIN_ADMIN.SECURITY  # 标题：安全性
           import@:
-            type: partials/security
-            context: blueprints://pages
+            type: partials/security  # 导入部分安全配置
+            context: blueprints://pages  # 设置上下文路径为 pages

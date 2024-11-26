@@ -1,8 +1,11 @@
-title: Flex User Accounts
-description: Manage your User Accounts in Flex.
-type: flex-objects
+title: 弹性用户帐户  # 配置标题：Flex 用户账户
+description: 在 Flex 中管理您的用户帐户。  # 描述信息：在 Flex 中管理用户账户
+type: flex-objects  # 定义类型为 Flex 对象
 
-# Deprecated in Grav 1.7.0-rc.4: file was renamed to user-accounts.yaml
+# 此文件在 1.7.0-rc.4 版本中被弃用，已重命名为 user-accounts.yaml
+# 旧文件仍保留以确保向后兼容
+
+# 通过 `extends@` 继承其他配置文件
 extends@:
-  type: user-accounts
-  context: blueprints://flex
+  type: user-accounts  # 继承自用户账户配置文件
+  context: blueprints://flex  # 指定继承的上下文路径

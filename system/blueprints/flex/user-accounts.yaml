@@ -1,155 +1,148 @@
-title: User Accounts
-description: Manage your User Accounts in Flex.
-type: flex-objects
+title: 用户帐户  # 配置标题：用户账户
+description: 在 Flex 中管理您的用户帐户。  # 描述信息：在 Flex 中管理用户账户
+type: flex-objects  # 定义类型为 Flex 对象
 
-# Extends user account
+# 此文件扩展了用户账户的基本配置
 extends@:
-  type: account
-  context: blueprints://user
+  type: account  # 继承自 account 类型
+  context: blueprints://user  # 指定上下文路径为 user 蓝图
 
 #
-# HIGHLY SPECIALIZED FLEX TYPE, AVOID USING USER ACCOUNTS AS BASE FOR YOUR OWN TYPE.
+# 高度专用的 Flex 类型，避免使用用户账户作为其他类型的基础。
 #
 
-# Flex configuration
+# Flex 配置
 config:
-  # Administration Configuration (needs Flex Objects plugin)
+  # 后台管理配置（需要安装 Flex Objects 插件）
   admin:
-    # Admin router
+    # 后台路由设置
     router:
-      path: '/accounts/users'
+      path: '/accounts/users'  # 用户账户管理的路由路径
       actions:
         configure:
-          path: '/accounts/configure'
+          path: '/accounts/configure'  # 配置页面的路径
       redirects:
-        '/user': '/accounts/users'
+        '/user': '/accounts/users'  # 重定向旧路径到新路径
         '/accounts': '/accounts/users'
 
-    # Permissions
+    # 权限设置
     permissions:
-      # Primary permissions
+      # 主权限
       admin.users:
-        type: crudl
-        label: User Accounts
+        type: crudl  # 提供增删改查及列出操作权限
+        label: User Accounts  # 标签：用户账户
       admin.configuration.users:
-        type: default
-        label: Accounts Configuration
+        type: default  # 默认类型权限
+        label: Accounts Configuration  # 标签：账户配置
 
-    # Admin menu
+    # 后台菜单设置
     menu:
       base:
-        location: '/accounts'
-        route: '/accounts/users'
-        index: 0
-        title: PLUGIN_ADMIN.ACCOUNTS
-        icon: fa-users
-        authorize: ['admin.users.list', 'admin.super']
-        priority: 6
+        location: '/accounts'  # 菜单位置
+        route: '/accounts/users'  # 菜单路由
+        index: 0  # 菜单索引
+        title: PLUGIN_ADMIN.ACCOUNTS  # 菜单标题：账户
+        icon: fa-users  # 菜单图标
+        authorize: ['admin.users.list', 'admin.super']  # 菜单授权，要求列出用户权限或超级管理员权限
+        priority: 6  # 菜单优先级
 
-    # Admin template type (folder)
-    template: user-accounts
+    # 后台模板类型（文件夹）
+    template: user-accounts  # 模板类型为 user-accounts
 
-    # List view
+    # 列表视图配置
     list:
-      # Fields shown in the list view
+      # 列表视图中显示的字段
       fields:
         username:
-          link: edit
-          search: true
+          link: edit  # 用户名字段可跳转到编辑页面
+          search: true  # 启用搜索
           field:
-            label: PLUGIN_ADMIN.USERNAME
+            label: PLUGIN_ADMIN.USERNAME  # 标签：用户名
         email:
-          search: true
+          search: true  # 启用搜索
         fullname:
-          search: true
-      # Extra options
+          search: true  # 启用搜索
+      # 额外选项
       options:
-        per_page: 20
-        order:
-          by: username
-          dir: asc
+        per_page: 20  # 每页记录数
+        order:  # 默认排序方式
+          by: username  # 按用户名排序
+          dir: asc  # 升序
 
-    # Edit view
+    # 编辑视图配置
     edit:
       title:
-        template: "{{ form.value('fullname') ?? form.value('username') }} &lt;{{ form.value('email') }}&gt;"
+        template: "{{ form.value('fullname') ?? form.value('username') }} &lt;{{ form.value('email') }}&gt;"  # 显示用户全名或用户名和邮箱
 
-    # Configure view
+    # 配置视图
     configure:
-      hidden: true
-      authorize: 'admin.configuration.users'
-      form: 'accounts'
+      hidden: true  # 隐藏配置选项
+      authorize: 'admin.configuration.users'  # 配置视图需要账户配置权限
+      form: 'accounts'  # 使用 accounts 表单
       title:
-        template: "{{ 'PLUGIN_ADMIN.ACCOUNTS'|tu }} {{ 'PLUGIN_ADMIN.CONFIGURATION'|tu }}"
+        template: "{{ 'PLUGIN_ADMIN.ACCOUNTS'|tu }} {{ 'PLUGIN_ADMIN.CONFIGURATION'|tu }}"  # 配置标题模板
 
-  # Site Configuration
+  # 站点配置
   site:
-    # Hide from flex types
-    hidden: true
+    hidden: true  # Flex 类型中隐藏
     templates:
       collection:
-        # Lookup for the template layout files for collections of objects
-        paths:
+        paths:  # 集合模板路径
           - 'flex/{TYPE}/collection/{LAYOUT}{EXT}'
       object:
-        # Lookup for the template layout files for objects
-        paths:
+        paths:  # 对象模板路径
           - 'flex/{TYPE}/object/{LAYOUT}{EXT}'
       defaults:
-        # Default template {TYPE}; overridden by filename of this blueprint if template folder exists
-        type: user-accounts
-        # Default template {LAYOUT}; can be overridden in render calls (usually Twig in templates)
-        layout: default
+        type: user-accounts  # 默认模板类型为 user-accounts
+        layout: default  # 默认布局为 default
 
-  # Data Configuration
+  # 数据配置
   data:
-    object: 'Grav\Common\Flex\Types\Users\UserObject'
-    collection: 'Grav\Common\Flex\Types\Users\UserCollection'
-    index: 'Grav\Common\Flex\Types\Users\UserIndex'
+    object: 'Grav\Common\Flex\Types\Users\UserObject'  # 使用用户对象类
+    collection: 'Grav\Common\Flex\Types\Users\UserCollection'  # 使用用户集合类
+    index: 'Grav\Common\Flex\Types\Users\UserIndex'  # 使用用户索引类
     storage:
-      class: 'Grav\Common\Flex\Types\Users\Storage\UserFileStorage'
+      class: 'Grav\Common\Flex\Types\Users\Storage\UserFileStorage'  # 使用用户文件存储类
       options:
         formatter:
-          class: 'Grav\Framework\File\Formatter\YamlFormatter'
-        folder: 'account://'
-        pattern: '{FOLDER}/{KEY}{EXT}'
-        indexed: true
-        key: username
-        case_sensitive: false
-    search:
+          class: 'Grav\Framework\File\Formatter\YamlFormatter'  # 使用 YAML 格式化器
+        folder: 'account://'  # 存储文件夹路径
+        pattern: '{FOLDER}/{KEY}{EXT}'  # 文件命名模式
+        indexed: true  # 启用索引以加快查询速度
+        key: username  # 使用用户名作为唯一键
+        case_sensitive: false  # 键不区分大小写
+    search:  # 搜索配置
       options:
-        contains: 1
-      fields:
+        contains: 1  # 搜索模式为包含匹配
+      fields:  # 可搜索的字段
         - key
         - email
         - username
         - fullname
 
+  # 关系配置
   relationships:
     media:
-      type: media
-      cardinality: to-many
+      type: media  # 媒体类型
+      cardinality: to-many  # 多对多关系
     avatar:
-      type: media
-      cardinality: to-one
-#    roles:
-#      type: user-groups
-#      cardinality: to-many
+      type: media  # 媒体类型
+      cardinality: to-one  # 一对一关系
 
 blueprints:
   configure:
     fields:
       import@:
-        type: configure/compat
-        context: blueprints://flex
+        type: configure/compat  # 导入兼容配置
+        context: blueprints://flex  # 设置上下文路径
 
-# Regular form definition
+# 常规表单定义
 form:
   fields:
-    username:
-      flex-disabled@: exists
-      disabled: false
-      flex-readonly@: exists
-      readonly: false
+    username:  # 用户名字段
+      flex-disabled@: exists  # 如果已存在，禁用字段
+      disabled: false  # 默认启用字段
+      flex-readonly@: exists  # 如果已存在，设置为只读
+      readonly: false  # 默认字段可编辑
       validate:
-        required: true
+        required: true  # 必填字段

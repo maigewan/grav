@@ -1,70 +1,70 @@
 form:
-  validation: loose
+  validation: loose  # 验证模式为宽松，允许用户更灵活地输入
 
   fields:
     tabs:
-      type: tabs
+      type: tabs  # 定义为选项卡形式
       fields:
-        cache:
-          type: tab
-          title: Caching
+        cache:  # 缓存选项卡
+          type: tab  # 定义为选项卡
+          title: Caching  # 选项卡标题：缓存
           fields:
-            object.cache.index.enabled:
-              type: toggle
-              toggleable: true
-              label: PLUGIN_ADMIN.FLEX_INDEX_CACHE_ENABLED
-              highlight: 1
-              config-default@: system.flex.cache.index.enabled
-              options:
-                1: PLUGIN_ADMIN.ENABLED
-                0: PLUGIN_ADMIN.DISABLED
+            object.cache.index.enabled:  # 启用索引缓存
+              type: toggle  # 开关类型
+              toggleable: true  # 允许切换该配置项
+              label: PLUGIN_ADMIN.FLEX_INDEX_CACHE_ENABLED  # 标签：启用索引缓存
+              highlight: 1  # 默认高亮选项
+              config-default@: system.flex.cache.index.enabled  # 默认配置值
+              options:  # 开关选项
+                1: PLUGIN_ADMIN.ENABLED  # 启用
+                0: PLUGIN_ADMIN.DISABLED  # 禁用
               validate:
-                type: bool
+                type: bool  # 验证输入为布尔值
 
-            object.cache.index.lifetime:
-              type: text
-              toggleable: true
-              label: PLUGIN_ADMIN.FLEX_INDEX_CACHE_LIFETIME
-              config-default@: system.flex.cache.index.lifetime
+            object.cache.index.lifetime:  # 索引缓存生命周期
+              type: text  # 文本输入类型
+              toggleable: true  # 允许切换该配置项
+              label: PLUGIN_ADMIN.FLEX_INDEX_CACHE_LIFETIME  # 标签：索引缓存生命周期
+              config-default@: system.flex.cache.index.lifetime  # 默认配置值
               validate:
-                type: int
+                type: int  # 验证输入为整数
 
-            object.cache.object.enabled:
-              type: toggle
-              toggleable: true
-              label: PLUGIN_ADMIN.FLEX_OBJECT_CACHE_ENABLED
-              highlight: 1
-              config-default@: system.flex.cache.object.enabled
-              options:
-                1: PLUGIN_ADMIN.ENABLED
-                0: PLUGIN_ADMIN.DISABLED
+            object.cache.object.enabled:  # 启用对象缓存
+              type: toggle  # 开关类型
+              toggleable: true  # 允许切换该配置项
+              label: PLUGIN_ADMIN.FLEX_OBJECT_CACHE_ENABLED  # 标签：启用对象缓存
+              highlight: 1  # 默认高亮选项
+              config-default@: system.flex.cache.object.enabled  # 默认配置值
+              options:  # 开关选项
+                1: PLUGIN_ADMIN.ENABLED  # 启用
+                0: PLUGIN_ADMIN.DISABLED  # 禁用
               validate:
-                type: bool
+                type: bool  # 验证输入为布尔值
 
-            object.cache.object.lifetime:
-              type: text
-              toggleable: true
-              label: PLUGIN_ADMIN.FLEX_OBJECT_CACHE_LIFETIME
-              config-default@: system.flex.cache.object.lifetime
+            object.cache.object.lifetime:  # 对象缓存生命周期
+              type: text  # 文本输入类型
+              toggleable: true  # 允许切换该配置项
+              label: PLUGIN_ADMIN.FLEX_OBJECT_CACHE_LIFETIME  # 标签：对象缓存生命周期
+              config-default@: system.flex.cache.object.lifetime  # 默认配置值
               validate:
-                type: int
+                type: int  # 验证输入为整数
 
-            object.cache.render.enabled:
-              type: toggle
-              toggleable: true
-              label: PLUGIN_ADMIN.FLEX_RENDER_CACHE_ENABLED
-              highlight: 1
-              config-default@: system.flex.cache.render.enabled
-              options:
-                1: PLUGIN_ADMIN.ENABLED
-                0: PLUGIN_ADMIN.DISABLED
+            object.cache.render.enabled:  # 启用渲染缓存
+              type: toggle  # 开关类型
+              toggleable: true  # 允许切换该配置项
+              label: PLUGIN_ADMIN.FLEX_RENDER_CACHE_ENABLED  # 标签：启用渲染缓存
+              highlight: 1  # 默认高亮选项
+              config-default@: system.flex.cache.render.enabled  # 默认配置值
+              options:  # 开关选项
+                1: PLUGIN_ADMIN.ENABLED  # 启用
+                0: PLUGIN_ADMIN.DISABLED  # 禁用
               validate:
-                type: bool
+                type: bool  # 验证输入为布尔值
 
-            object.cache.render.lifetime:
-              type: text
-              toggleable: true
-              label: PLUGIN_ADMIN.FLEX_RENDER_CACHE_LIFETIME
-              config-default@: system.flex.cache.render.lifetime
+            object.cache.render.lifetime:  # 渲染缓存生命周期
+              type: text  # 文本输入类型
+              toggleable: true  # 允许切换该配置项
+              label: PLUGIN_ADMIN.FLEX_RENDER_CACHE_LIFETIME  # 标签：渲染缓存生命周期
+              config-default@: system.flex.cache.render.lifetime  # 默认配置值
               validate:
-                type: int
+                type: int  # 验证输入为整数

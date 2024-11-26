@@ -1,16 +1,16 @@
-title: PLUGIN_ADMIN.ROOT
+title: PLUGIN_ADMIN.ROOT  # 配置标题：根设置
 
-rules:
-  slug:
-    pattern: '[a-zA-Zа-яA-Я0-9_\-]+'
-    min: 1
-    max: 200
+rules:  # 规则部分
+  slug:  # 定义 URL slug 的规则
+    pattern: '[a-zA-Zа-яA-Я0-9_\-]+'  # 匹配允许的字符：字母、数字、下划线和连字符
+    min: 1  # 最少 1 个字符
+    max: 200  # 最多 200 个字符
 
-form:
-  validation: loose
+form:  # 表单部分
+  validation: loose  # 验证模式为宽松，允许更灵活的输入
 
   fields:
 
-    tabs:
-      type: tabs
-      active: 1
+    tabs:  # 选项卡设置
+      type: tabs  # 定义为选项卡类型
+      active: 1  # 默认激活第一个选项卡

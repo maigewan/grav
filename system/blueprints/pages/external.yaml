@@ -1,52 +1,51 @@
-title: PLUGIN_ADMIN.EXTERNAL
+title: PLUGIN_ADMIN.EXTERNAL  # 配置标题：外部页面设置
 extends@:
-  type: default
-  context: blueprints://pages
+  type: default  # 继承自默认类型
+  context: blueprints://pages  # 上下文路径为 pages 蓝图
 
 form:
-  validation: loose
+  validation: loose  # 验证模式为宽松，允许更灵活的输入
   fields:
 
-    tabs:
-      type: tabs
-      active: 1
+    tabs:  # 选项卡设置
+      type: tabs  # 定义为选项卡类型
+      active: 1  # 默认激活第一个选项卡
 
       fields:
 
-        content:
+        content:  # 内容选项卡
           fields:
 
-            header.title:
-              type: text
-              autofocus: true
-              style: horizontal
-              label: PLUGIN_ADMIN.TITLE
+            header.title:  # 标题字段
+              type: text  # 文本输入类型
+              autofocus: true  # 默认聚焦到此字段
+              style: horizontal  # 水平布局样式
+              label: PLUGIN_ADMIN.TITLE  # 标签：标题
 
-            content:
-              unset@: true
+            content:  # 内容字段
+              unset@: true  # 取消继承默认的内容字段
 
-            header.media_order:
-              unset@: true
+            header.media_order:  # 媒体顺序字段
+              unset@: true  # 取消继承默认的媒体顺序字段
 
-            header.external_url:
-              type: text
-              label: PLUGIN_ADMIN.EXTERNAL_URL
-              placeholder: https://getgrav.org
+            header.external_url:  # 外部 URL 字段
+              type: text  # 文本输入类型
+              label: PLUGIN_ADMIN.EXTERNAL_URL  # 标签：外部 URL
+              placeholder: https://getgrav.org  # 占位符：提供外部 URL 示例
               validate:
-                required: true
+                required: true  # 验证为必填字段
 
-        options:
+        options:  # 选项选项卡
           fields:
 
-            publishing:
+            publishing:  # 发布设置部分
               fields:
 
-                header.date:
-                  unset@: true
+                header.date:  # 日期字段
+                  unset@: true  # 取消继承默认的日期字段
 
-                header.metadata:
-                  unset@: true
+                header.metadata:  # 元数据字段
+                  unset@: true  # 取消继承默认的元数据字段
 
-            taxonomies:
-              unset@: true
-
+            taxonomies:  # 分类字段
+              unset@: true  # 取消继承默认的分类字段

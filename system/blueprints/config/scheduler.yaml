@@ -1,78 +1,83 @@
 title: PLUGIN_ADMIN.SCHEDULER
 
 form:
-    validation: loose
+    validation: loose  # 验证模式为“宽松”，允许输入格式更灵活
 
     fields:
 
         status_title:
-            type: section
-            title: PLUGIN_ADMIN.SCHEDULER_STATUS
-            underline: true
+            type: section  # 定义一个新的部分
+            title: PLUGIN_ADMIN.SCHEDULER_STATUS  # 部分标题为调度器状态
+            underline: true  # 标题下方显示下划线
 
         status:
-            type: cronstatus
+            type: cronstatus  # 特殊类型，用于显示当前计划任务的状态
             validate:
-                type: commalist
+                type: commalist  # 验证为逗号分隔的值，例如多个状态值
 
         jobs_title:
-            type: section
-            title: PLUGIN_ADMIN.SCHEDULER_JOBS
-            underline: true
+            type: section  # 定义另一个新的部分
+            title: PLUGIN_ADMIN.SCHEDULER_JOBS  # 部分标题为调度器任务
+            underline: true  # 标题下方显示下划线
 
         custom_jobs:
-          type: list
-          style: vertical
-          label:
-          classes: cron-job-list compact
-          key: id
-          fields:
+          type: list  # 定义为一个列表类型，支持动态添加多个任务
+          style: vertical  # 列表样式为垂直排列
+          label:  # 标签内容留空，可根据需要补充
+          classes: cron-job-list compact  # 自定义 CSS 类，用于调整列表显示
+          key: id  # 列表的唯一标识符为 `id`
+          fields:  # 定义列表中的字段
             .id:
-              type: key
-              label: ID
-              placeholder: 'process-name'
+              type: key  # 此字段类型为“键”，唯一标识每个任务
+              label: ID  # 字段标签为“ID”
+              placeholder: 'process-name'  # 占位符文本，提示输入进程名称
               validate:
-                  required: true
-                  pattern: '[a-zа-я0-9_\-]+'
-                  max: 20
-                  message: 'ID must be lowercase with dashes/underscores only and less than 20 characters'
+                  required: true  # 此字段为必填
+                  pattern: '[a-zа-я0-9_\-]+'  # 验证输入格式为小写字母、数字、下划线或连字符
+                  max: 20  # 输入的最大字符数为 20
+                  message: 'ID 必须小写，仅包含破折号/下划线，且少于 20 个字符'  # 输入验证失败时的错误提示信息
             .command:
-              type: text
-              label: PLUGIN_ADMIN.COMMAND
-              placeholder: 'ls'
+              type: text  # 定义为文本类型
+              label: PLUGIN_ADMIN.COMMAND  # 字段标签为“命令”
+              placeholder: 'ls'  # 提示输入的示例命令为“ls”
               validate:
-                  required: true
+                  required: true  # 此字段为必填
             .args:
-              type: text
-              label: PLUGIN_ADMIN.EXTRA_ARGUMENTS
-              placeholder: '-lah'
+              type: text  # 定义为文本类型
+              label: PLUGIN_ADMIN.EXTRA_ARGUMENTS  # 字段标签为“额外参数”
+              placeholder: '-lah'  # 提示输入的示例参数为“-lah”
             .at:
-              type: text
-              wrapper_classes: cron-selector
-              label: PLUGIN_ADMIN.SCHEDULER_RUNAT
-              help: PLUGIN_ADMIN.SCHEDULER_RUNAT_HELP
-              placeholder: '* * * * *'
+              type: text  # 定义为文本类型
+              wrapper_classes: cron-selector  # 添加自定义包装类，用于样式调整
+              label: PLUGIN_ADMIN.SCHEDULER_RUNAT  # 字段标签为“运行时间”
+              help: PLUGIN_ADMIN.SCHEDULER_RUNAT_HELP  # 提供额外帮助信息，解释时间格式
+              placeholder: '* * * * *'  # 提示输入的示例为 Cron 时间表达式
               validate:
-                  required: true
+                  required: true  # 此字段为必填
             .output:
-              type: text
-              label: PLUGIN_ADMIN.SCHEDULER_OUTPUT
-              help: PLUGIN_ADMIN.SCHEDULER_OUTPUT_HELP
-              placeholder: 'logs/ls-cron.out'
+              type: text  # 定义为文本类型
+              label: PLUGIN_ADMIN.SCHEDULER_OUTPUT  # 字段标签为“输出文件”
+              help: PLUGIN_ADMIN.SCHEDULER_OUTPUT_HELP  # 帮助信息，解释输出文件的用途
+              placeholder: 'logs/ls-cron.out'  # 提示输入的示例输出路径
             .output_mode:
-              type: select
-              label: PLUGIN_ADMIN.SCHEDULER_OUTPUT_TYPE
-              help: PLUGIN_ADMIN.SCHEDULER_OUTPUT_TYPE_HELP
-              default: append
-              options:
-                  append: Append
-                  overwrite: Overwrite
+              type: select  # 定义为下拉选择框
+              label: PLUGIN_ADMIN.SCHEDULER_OUTPUT_TYPE  # 字段标签为“输出模式”
+              help: PLUGIN_ADMIN.SCHEDULER_OUTPUT_TYPE_HELP  # 帮助信息，解释输出模式的作用
+              default: append  # 默认选项为“追加模式”
+              options:  # 提供选项列表
+                  append: Append  # 追加到现有文件末尾
+                  overwrite: Overwrite  # 覆盖现有文件内容
             .email:
-                type: text
-                label: PLUGIN_ADMIN.SCHEDULER_EMAIL
-                help: PLUGIN_ADMIN.SCHEDULER_EMAIL_HELP
-                placeholder: 'notifications@yoursite.com'
+                type: text  # 定义为文本类型
+                label: PLUGIN_ADMIN.SCHEDULER_EMAIL  # 字段标签为“电子邮件通知”
+                help: PLUGIN_ADMIN.SCHEDULER_EMAIL_HELP  # 帮助信息，解释发送通知的用途
+                placeholder: 'erelcms@gmail.com'  # 提示输入的示例电子邮件地址
 
-
-
-
+# 额外注释：
+# 1. 此配置文件用于 Grav CMS 的调度器插件，提供任务管理和运行配置的界面。
+# 2. ID 字段为任务的唯一标识符，建议确保任务 ID 简洁且有意义。
+# 3. `command` 字段中定义需要执行的命令，例如 `php` 或 `python`。
+# 4. `args` 字段中添加命令的附加参数，格式和内容根据实际需求填写。
+# 5. `at` 字段使用标准的 Cron 时间表达式，用于定义任务的运行频率。
+# 6. `output` 和 `output_mode` 配置任务运行日志的存储方式。
+# 7. `email` 字段配置任务完成或失败时发送通知的目标邮箱地址。
