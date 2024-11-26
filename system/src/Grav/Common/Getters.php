@@ -1,10 +1,8 @@
 <?php
 
 /**
- * @package    Grav\Common
- *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
- * @license    MIT License; see LICENSE file for details.
+ * 本文件定义了 erel CMS 中的抽象类 Getters，它实现了 ArrayAccess 和 Countable 接口。
+ * Getters 类提供了一种通用方式来访问对象的属性或内部变量，同时支持数组语法访问和计数功能。
  */
 
 namespace Grav\Common;
@@ -15,18 +13,21 @@ use function count;
 
 /**
  * Class Getters
- * @package Grav\Common
+ * @package erel\Common
+ *
+ * Getters 类用于通过数组风格访问和操作对象的属性。
+ * 它支持魔术方法 (__set, __get, __isset, __unset)，同时提供了一种机制，通过指定的变量名称管理属性。
  */
 abstract class Getters implements ArrayAccess, Countable
 {
-    /** @var string Define variable used in getters. */
+    /** @var string 定义用于管理属性的变量名称。 */
     protected $gettersVariable = null;
 
     /**
-     * Magic setter method
+     * 魔术方法 __set，用于设置属性值。
      *
-     * @param int|string $offset Medium name value
-     * @param mixed $value  Medium value
+     * @param int|string $offset 属性名称或键。
+     * @param mixed      $value  要设置的值。
      */
     #[\ReturnTypeWillChange]
     public function __set($offset, $value)
@@ -35,10 +36,10 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * Magic getter method
+     * 魔术方法 __get，用于获取属性值。
      *
-     * @param  int|string $offset Medium name value
-     * @return mixed         Medium value
+     * @param  int|string $offset 属性名称或键。
+     * @return mixed      返回对应的值。
      */
     #[\ReturnTypeWillChange]
     public function __get($offset)
@@ -47,10 +48,10 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * Magic method to determine if the attribute is set
+     * 魔术方法 __isset，检查属性是否存在。
      *
-     * @param  int|string $offset Medium name value
-     * @return boolean         True if the value is set
+     * @param  int|string $offset 属性名称或键。
+     * @return bool       如果存在返回 true，否则返回 false。
      */
     #[\ReturnTypeWillChange]
     public function __isset($offset)
@@ -59,9 +60,9 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * Magic method to unset the attribute
+     * 魔术方法 __unset，用于移除属性。
      *
-     * @param int|string $offset The name value to unset
+     * @param int|string $offset 属性名称或键。
      */
     #[\ReturnTypeWillChange]
     public function __unset($offset)
@@ -70,8 +71,10 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * @param int|string $offset
-     * @return bool
+     * 检查属性是否存在。
+     *
+     * @param int|string $offset 属性名称或键。
+     * @return bool 如果存在返回 true，否则返回 false。
      */
     #[\ReturnTypeWillChange]
     public function offsetExists($offset)
@@ -86,8 +89,10 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * @param int|string $offset
-     * @return mixed
+     * 获取属性的值。
+     *
+     * @param int|string $offset 属性名称或键。
+     * @return mixed 返回对应的值，如果不存在则返回 null。
      */
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
@@ -102,8 +107,10 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * @param int|string $offset
-     * @param mixed $value
+     * 设置属性值。
+     *
+     * @param int|string $offset 属性名称或键。
+     * @param mixed      $value  要设置的值。
      */
     #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
@@ -117,7 +124,9 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * @param int|string $offset
+     * 移除属性。
+     *
+     * @param int|string $offset 属性名称或键。
      */
     #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
@@ -131,7 +140,9 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * @return int
+     * 获取对象的属性数量。
+     *
+     * @return int 属性数量。
      */
     #[\ReturnTypeWillChange]
     public function count()
@@ -145,9 +156,9 @@ abstract class Getters implements ArrayAccess, Countable
     }
 
     /**
-     * Returns an associative array of object properties.
+     * 将对象的属性转为关联数组。
      *
-     * @return array
+     * @return array 返回包含对象属性的关联数组。
      */
     public function toArray()
     {
@@ -160,6 +171,7 @@ abstract class Getters implements ArrayAccess, Countable
         $properties = (array)$this;
         $list = [];
         foreach ($properties as $property => $value) {
+            // 过滤掉私有属性和受保护属性（以 "\0" 开头）。
             if ($property[0] !== "\0") {
                 $list[$property] = $value;
             }

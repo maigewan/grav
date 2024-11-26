@@ -1,12 +1,4 @@
 <?php
-
-/**
- * @package    Grav\Common
- *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
- * @license    MIT License; see LICENSE file for details.
- */
-
 namespace Grav\Common;
 
 use Composer\Autoload\ClassLoader;
@@ -70,21 +62,21 @@ use function is_string;
 use function strlen;
 
 /**
- * Grav container is the heart of Grav.
+ * Grav.php 容器是 erelcms 的核心。
  *
  * @package Grav\Common
  */
 class Grav extends Container
 {
-    /** @var string Processed output for the page. */
+    /** @var string 处理后的页面输出。 */
     public $output;
 
-    /** @var static The singleton instance */
+    /** @var static 单例实例 */
     protected static $instance;
 
     /**
-     * @var array Contains all Services and ServicesProviders that are mapped
-     *            to the dependency injection container.
+     * @var array 包含所有服务和服务提供者，这些服务和服务提供者被映射到依赖注入容器中。
+     *            可以是服务提供者的类名，或者是 serviceKey => serviceClass 的键值对。
      */
     protected static $diMap = [
         AccountsServiceProvider::class,
@@ -115,7 +107,7 @@ class Grav extends Container
     ];
 
     /**
-     * @var array All middleware processors that are processed in $this->process()
+     * @var array 所有中间件处理器，这些处理器将在 $this->process() 中被处理。
      */
     protected $middleware = [
         'multipartRequestSupport',
@@ -137,7 +129,7 @@ class Grav extends Container
     protected $initialized = [];
 
     /**
-     * Reset the Grav instance.
+     * 重置 erel 实例。
      *
      * @return void
      */
@@ -150,10 +142,10 @@ class Grav extends Container
     }
 
     /**
-     * Return the Grav instance. Create it if it's not already instanced
+     * 返回 erel 实例。如果尚未实例化，则创建一个新的实例。
      *
      * @param array $values
-     * @return Grav
+     * @return erel
      */
     public static function instance(array $values = [])
     {
@@ -163,7 +155,7 @@ class Grav extends Container
             /** @var ClassLoader|null $loader */
             $loader = self::$instance['loader'] ?? null;
             if ($loader) {
-                // Load fix for Deferred Twig Extension
+                // 加载 Deferred Twig 扩展的修复
                 $loader->addPsr4('Phive\\Twig\\Extensions\\Deferred\\', LIB_DIR . 'Phive/Twig/Extensions/Deferred/', true);
             }
         } elseif ($values) {
@@ -177,7 +169,7 @@ class Grav extends Container
     }
 
     /**
-     * Get Grav version.
+     * 获取 erel 版本。
      *
      * @return string
      */
@@ -187,6 +179,8 @@ class Grav extends Container
     }
 
     /**
+     * 检查是否已经完成设置。
+     *
      * @return bool
      */
     public function isSetup(): bool
@@ -195,7 +189,7 @@ class Grav extends Container
     }
 
     /**
-     * Setup Grav instance using specific environment.
+     * 使用特定环境设置 erel 实例。
      *
      * @param string|null $environment
      * @return $this
@@ -208,12 +202,12 @@ class Grav extends Container
 
         $this->initialized['setup'] = true;
 
-        // Force environment if passed to the method.
+        // 如果传递了环境参数，强制使用该环境。
         if ($environment) {
             Setup::$environment = $environment;
         }
 
-        // Initialize setup and streams.
+        // 初始化 setup 和 streams。
         $this['setup'];
         $this['streams'];
 
@@ -221,18 +215,18 @@ class Grav extends Container
     }
 
     /**
-     * Initialize CLI environment.
+     * 初始化 CLI 环境。
      *
-     * Call after `$grav->setup($environment)`
+     * 在 `$grav->setup($environment)` 之后调用。
      *
-     * - Load configuration
-     * - Initialize logger
-     * - Disable debugger
-     * - Set timezone, locale
-     * - Load plugins (call PluginsLoadedEvent)
-     * - Set Pages and Users type to be used in the site
+     * - 加载配置
+     * - 初始化日志记录器
+     * - 禁用调试器
+     * - 设置时区和区域设置
+     * - 加载插件（调用 PluginsLoadedEvent）
+     * - 设置站点使用的页面和用户类型
      *
-     * This method WILL NOT initialize assets, twig or pages.
+     * 此方法不会初始化资产、Twig 或页面。
      *
      * @return $this
      */
@@ -244,7 +238,7 @@ class Grav extends Container
     }
 
     /**
-     * Process a request
+     * 处理请求。
      *
      * @return void
      */
@@ -254,7 +248,7 @@ class Grav extends Container
             return;
         }
 
-        // Initialize Grav if needed.
+        // 如果需要，初始化 erel。
         $this->setup();
 
         $this->initialized['process'] = true;
@@ -315,13 +309,13 @@ class Grav extends Container
         /** @var Messages $messages */
         $messages = $this['messages'];
 
-        // Prevent caching if session messages were displayed in the page.
+        // 如果会话消息在页面中显示，则防止缓存。
         $noCache = $messages->isCleared();
         if ($noCache) {
             $response = $response->withHeader('Cache-Control', 'no-store, max-age=0');
         }
 
-        // Handle ETag and If-None-Match headers.
+        // 处理 ETag 和 If-None-Match 头。
         if ($response->getHeaderLine('ETag') === '1') {
             $etag = md5($body);
             $response = $response->withHeader('ETag', '"' . $etag . '"');
@@ -333,40 +327,40 @@ class Grav extends Container
             }
         }
 
-        // Echo page content.
+        // 输出页面内容。
         $this->header($response);
         echo $body;
 
         $this['debugger']->render();
 
-        // Response object can turn off all shutdown processing. This can be used for example to speed up AJAX responses.
-        // Note that using this feature will also turn off response compression.
+        // 响应对象可以关闭所有关闭处理。这可以用于例如加快 AJAX 响应。
+        // 请注意，使用此功能也会关闭响应压缩。
         if ($response->getHeaderLine('Grav-Internal-SkipShutdown') !== '1') {
             register_shutdown_function([$this, 'shutdown']);
         }
     }
 
     /**
-     * Clean any output buffers. Useful when exiting from the application.
+     * 清理任何输出缓冲区。当从应用程序退出时非常有用。
      *
-     * Please use $grav->close() and $grav->redirect() instead of calling this one!
+     * 请使用 `$grav->close()` 和 `$grav->redirect()` 而不是直接调用此方法！
      *
      * @return void
      */
     public function cleanOutputBuffers(): void
     {
-        // Make sure nothing extra gets written to the response.
+        // 确保没有额外的内容被写入响应。
         while (ob_get_level()) {
             ob_end_clean();
         }
-        // Work around PHP bug #8218 (8.0.17 & 8.1.4).
+        // 解决 PHP bug #8218 (8.0.17 & 8.1.4)。
         header_remove('Content-Encoding');
     }
 
     /**
-     * Terminates Grav request with a response.
+     * 使用响应终止 erel 请求。
      *
-     * Please use this method instead of calling `die();` or `exit();`. Note that you need to create a response object.
+     * 请使用此方法而不是调用 `die();` 或 `exit();`。注意，您需要创建一个响应对象。
      *
      * @param ResponseInterface $response
      * @return never-return
@@ -375,7 +369,7 @@ class Grav extends Container
     {
         $this->cleanOutputBuffers();
 
-        // Close the session.
+        // 关闭会话。
         if (isset($this['session'])) {
             $this['session']->close();
         }
@@ -392,13 +386,13 @@ class Grav extends Container
         /** @var Messages $messages */
         $messages = $this['messages'];
 
-        // Prevent caching if session messages were displayed in the page.
+        // 如果会话消息在页面中显示，则防止缓存。
         $noCache = $messages->isCleared();
         if ($noCache) {
             $response = $response->withHeader('Cache-Control', 'no-store, max-age=0');
         }
 
-        // Handle ETag and If-None-Match headers.
+        // 处理 ETag 和 If-None-Match 头。
         if ($response->getHeaderLine('ETag') === '1') {
             $etag = md5($body);
             $response = $response->withHeader('ETag', '"' . $etag . '"');
@@ -410,7 +404,7 @@ class Grav extends Container
             }
         }
 
-        // Echo page content.
+        // 输出页面内容。
         $this->header($response);
         echo $body;
         exit();
@@ -419,7 +413,7 @@ class Grav extends Container
     /**
      * @param ResponseInterface $response
      * @return never-return
-     * @deprecated 1.7 Use $grav->close() instead.
+     * @deprecated 1.7 使用 `$grav->close()` 代替。
      */
     public function exit(ResponseInterface $response): void
     {
@@ -427,12 +421,12 @@ class Grav extends Container
     }
 
     /**
-     * Terminates Grav request and redirects browser to another location.
+     * 终止 erel 请求并将浏览器重定向到另一个位置。
      *
-     * Please use this method instead of calling `header("Location: {$url}", true, 302); exit();`.
+     * 请使用此方法而不是调用 `header("Location: {$url}", true, 302); exit();`。
      *
-     * @param Route|string $route Internal route.
-     * @param int|null $code  Redirection code (30x)
+     * @param Route|string $route 内部路由。
+     * @param int|null $code  重定向代码 (30x)
      * @return never-return
      */
     public function redirect($route, $code = null): void
@@ -443,10 +437,10 @@ class Grav extends Container
     }
 
     /**
-     * Returns redirect response object from Grav.
+     * 从 erel 返回重定向响应对象。
      *
-     * @param Route|string $route Internal route.
-     * @param int|null $code  Redirection code (30x)
+     * @param Route|string $route 内部路由。
+     * @param int|null $code  重定向代码 (30x)
      * @return ResponseInterface
      */
     public function getRedirectResponse($route, $code = null): ResponseInterface
@@ -455,11 +449,11 @@ class Grav extends Container
         $uri = $this['uri'];
 
         if (is_string($route)) {
-            // Clean route for redirect
+            // 清理重定向路由
             $route = preg_replace("#^\/[\\\/]+\/#", '/', $route);
 
             if (null === $code) {
-                // Check for redirect code in the route: e.g. /new/[301], /new[301]/route or /new[301].html
+                // 检查路由中的重定向代码，例如 /new/[301]，/new[301]/route 或 /new[301].html
                 $regex = '/.*(\[(30[1-7])\])(.\w+|\/.*?)?$/';
                 preg_match($regex, $route, $matches);
                 if ($matches) {
@@ -474,15 +468,15 @@ class Grav extends Container
                 $url = rtrim($uri->rootUrl(), '/') . '/';
 
                 if ($this['config']->get('system.pages.redirect_trailing_slash', true)) {
-                    $url .= trim($route, '/'); // Remove trailing slash
+                    $url .= trim($route, '/'); // 移除尾部斜杠
                 } else {
-                    $url .= ltrim($route, '/'); // Support trailing slash default routes
+                    $url .= ltrim($route, '/'); // 支持尾部斜杠的默认路由
                 }
             }
         } elseif ($route instanceof Route) {
             $url = $route->toString(true);
         } else {
-            throw new InvalidArgumentException('Bad $route');
+            throw new InvalidArgumentException('无效的 $route 参数');
         }
 
         if ($code < 300 || $code > 399) {
@@ -501,10 +495,10 @@ class Grav extends Container
     }
 
     /**
-     * Redirect browser to another location taking language into account (preferred)
+     * 根据语言安全地重定向浏览器到另一个位置（首选）。
      *
-     * @param string $route Internal route.
-     * @param int    $code  Redirection code (30x)
+     * @param string $route 内部路由。
+     * @param int    $code  重定向代码 (30x)
      * @return void
      */
     public function redirectLangSafe($route, $code = null): void
@@ -517,7 +511,7 @@ class Grav extends Container
     }
 
     /**
-     * Set response header.
+     * 设置响应头。
      *
      * @param ResponseInterface|null $response
      * @return void
@@ -532,7 +526,7 @@ class Grav extends Container
 
         header("HTTP/{$response->getProtocolVersion()} {$response->getStatusCode()} {$response->getReasonPhrase()}");
         foreach ($response->getHeaders() as $key => $values) {
-            // Skip internal Grav headers.
+            // 跳过内部 erel 头。
             if (strpos($key, 'Grav-Internal-') === 0) {
                 continue;
             }
@@ -543,13 +537,13 @@ class Grav extends Container
     }
 
     /**
-     * Set the system locale based on the language and configuration
+     * 根据语言和配置设置系统区域设置。
      *
      * @return void
      */
     public function setLocale(): void
     {
-        // Initialize Locale if set and configured.
+        // 如果启用了语言并且配置了覆盖区域设置，则初始化区域设置。
         if ($this['language']->enabled() && $this['config']->get('system.languages.override_locale')) {
             $language = $this['language']->getLanguage();
             setlocale(LC_ALL, strlen($language) < 3 ? ($language . '_' . strtoupper($language)) : $language);
@@ -559,6 +553,8 @@ class Grav extends Container
     }
 
     /**
+     * 分发事件。
+     *
      * @param object $event
      * @return object
      */
@@ -579,10 +575,10 @@ class Grav extends Container
     }
 
     /**
-     * Fires an event with optional parameters.
+     * 触发一个带有可选参数的事件。
      *
-     * @param  string $eventName
-     * @param  Event|null $event
+     * @param  string $eventName 事件名称
+     * @param  Event|null $event 事件对象
      * @return Event
      */
     public function fireEvent($eventName, Event $event = null)
@@ -604,18 +600,18 @@ class Grav extends Container
     }
 
     /**
-     * Set the final content length for the page and flush the buffer
+     * 设置页面的最终内容长度并刷新缓冲区。
      *
      * @return void
      */
     public function shutdown(): void
     {
-        // Prevent user abort allowing onShutdown event to run without interruptions.
+        // 防止用户中断，允许 onShutdown 事件无中断地运行。
         if (function_exists('ignore_user_abort')) {
             @ignore_user_abort(true);
         }
 
-        // Close the session allowing new requests to be handled.
+        // 关闭会话，允许处理新的请求。
         if (isset($this['session'])) {
             $this['session']->close();
         }
@@ -623,31 +619,31 @@ class Grav extends Container
         /** @var Config $config */
         $config = $this['config'];
         if ($config->get('system.debugger.shutdown.close_connection', true)) {
-            // Flush the response and close the connection to allow time consuming tasks to be performed without leaving
-            // the connection to the client open. This will make page loads to feel much faster.
+            // 刷新响应并关闭连接，以允许执行耗时任务而不保持客户端连接。
+            // 这将使页面加载感觉更快。
 
-            // FastCGI allows us to flush all response data to the client and finish the request.
+            // FastCGI 允许我们将所有响应数据刷新到客户端并完成请求。
             $success = function_exists('fastcgi_finish_request') ? @fastcgi_finish_request() : false;
             if (!$success) {
-                // Unfortunately without FastCGI there is no way to force close the connection.
-                // We need to ask browser to close the connection for us.
+                // 不幸的是，没有 FastCGI 无法强制关闭连接。
+                // 我们需要请求浏览器为我们关闭连接。
 
                 if ($config->get('system.cache.gzip')) {
-                    // Flush gzhandler buffer if gzip setting was enabled to get the size of the compressed output.
+                    // 如果启用了 gzip 设置，刷新 gzhandler 缓冲区以获取压缩输出的大小。
                     ob_end_flush();
                 } elseif ($config->get('system.cache.allow_webserver_gzip')) {
-                    // Let web server to do the hard work.
+                    // 让 Web 服务器完成繁重的工作。
                     header('Content-Encoding: identity');
                 } elseif (function_exists('apache_setenv')) {
-                    // Without gzip we have no other choice than to prevent server from compressing the output.
-                    // This action turns off mod_deflate which would prevent us from closing the connection.
+                    // 没有 gzip，我们别无选择，只能防止服务器压缩输出。
+                    // 此操作关闭 mod_deflate，这将防止我们关闭连接。
                     @apache_setenv('no-gzip', '1');
                 } else {
-                    // Fall back to unknown content encoding, it prevents most servers from deflating the content.
+                    // 回退到未知内容编码，它可以防止大多数服务器解压缩内容。
                     header('Content-Encoding: none');
                 }
 
-                // Get length and close the connection.
+                // 获取长度并关闭连接。
                 header('Content-Length: ' . ob_get_length());
                 header('Connection: close');
 
@@ -657,19 +653,17 @@ class Grav extends Container
             }
         }
 
-        // Run any time consuming tasks.
+        // 运行任何耗时任务。
         $this->fireEvent('onShutdown');
     }
 
     /**
-     * Magic Catch All Function
+     * 魔术捕获所有函数。
      *
-     * Used to call closures.
+     * 用于调用闭包。
      *
-     * Source: http://stackoverflow.com/questions/419804/closures-as-class-members
-     *
-     * @param string $method
-     * @param array $args
+     * @param string $method 方法名
+     * @param array $args 参数数组
      * @return mixed|null
      */
     #[\ReturnTypeWillChange]
@@ -681,12 +675,12 @@ class Grav extends Container
     }
 
     /**
-     * Measure how long it takes to do an action.
+     * 测量执行一个操作所需的时间。
      *
-     * @param string $timerId
-     * @param string $timerTitle
-     * @param callable $callback
-     * @return mixed   Returns value returned by the callable.
+     * @param string $timerId    计时器标识
+     * @param string $timerTitle 计时器标题
+     * @param callable $callback 执行的回调函数
+     * @return mixed              返回回调函数的结果。
      */
     public function measureTime(string $timerId, string $timerTitle, callable $callback)
     {
@@ -699,9 +693,9 @@ class Grav extends Container
     }
 
     /**
-     * Initialize and return a Grav instance
+     * 初始化并返回一个 erel 实例。
      *
-     * @param  array $values
+     * @param  array $values 初始化时传入的值
      * @return static
      */
     protected static function load(array $values)
@@ -710,7 +704,7 @@ class Grav extends Container
 
         $container['debugger'] = new Debugger();
         $container['grav'] = function (Container $container) {
-            user_error('Calling $grav[\'grav\'] or {{ grav.grav }} is deprecated since Grav 1.6, just use $grav or {{ grav }}', E_USER_DEPRECATED);
+            user_error('调用 $grav[\'grav\'] 或 {{ grav.grav }} 已在 erel 1.6 中弃用.', E_USER_DEPRECATED);
 
             return $container;
         };
@@ -721,10 +715,9 @@ class Grav extends Container
     }
 
     /**
-     * Register all services
-     * Services are defined in the diMap. They can either only the class
-     * of a Service Provider or a pair of serviceKey => serviceClass that
-     * gets directly mapped into the container.
+     * 注册所有服务。
+     * 服务在 diMap 中定义。它们可以是服务提供者的类，或者是 serviceKey => serviceClass 的键值对，
+     * 这些键值对将直接映射到容器中。
      *
      * @return void
      */
@@ -742,10 +735,10 @@ class Grav extends Container
     }
 
     /**
-     * This attempts to find media, other files, and download them
+     * 尝试查找媒体、其他文件，并下载它们。
      *
-     * @param string $path
-     * @return PageInterface|false
+     * @param string $path 文件路径
+     * @return PageInterface|false 返回页面接口或 false 如果未找到
      */
     public function fallbackUrl($path)
     {
@@ -782,7 +775,7 @@ class Grav extends Container
 
         $this->fireEvent('onPageFallBackUrl', $event);
 
-        // Check whitelist first, then ensure extension is a valid media type
+        // 先检查白名单，然后确保扩展名是有效的媒体类型
         if (!empty($fallback_types) && !in_array($uri_extension, $fallback_types, true)) {
             return false;
         }
@@ -793,7 +786,7 @@ class Grav extends Container
         if ($page) {
             $media = $page->media()->all();
 
-            // if this is a media object, try actions first
+            // 如果这是一个媒体对象，先尝试执行操作
             if (isset($media[$media_file])) {
                 /** @var Medium $medium */
                 $medium = $media[$media_file];
@@ -805,7 +798,7 @@ class Grav extends Container
                 Utils::download($medium->path(), false);
             }
 
-            // unsupported media type, try to download it...
+            // 不支持的媒体类型，尝试下载它...
             if ($uri_extension) {
                 $extension = $uri_extension;
             } elseif (isset($path_parts['extension'])) {
@@ -823,7 +816,7 @@ class Grav extends Container
             }
         }
 
-        // Nothing found
+        // 未找到任何内容
         return false;
     }
 }

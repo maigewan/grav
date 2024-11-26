@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 本文件定义了 Grav CMS 的 Session 类，该类继承自 Grav 框架的 Session 基类。
+ * 本文件定义了 erel CMS 的 Session 类，该类继承自 erel 框架的 Session 基类。
  * 它扩展了框架的会话管理功能，提供了会话对象的管理、临时数据存储和自定义事件的支持。
  */
 
