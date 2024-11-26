@@ -17,8 +17,10 @@ http_x_forwarded:                                # 各种 HTTP_X_FORWARD 标头�
   ip: true
 
 languages:
-  supported: []                                  # 支持的语言列表，例如：[en, fr, de]
-  default_lang:                                  # 默认为第一个支持的语言。必须是支持的语言之一
+  supported:
+    - zh
+    - en                                  # 支持的语言列表，例如：[en, fr, de]
+  default_lang: zh                                 # 默认为第一个支持的语言。必须是支持的语言之一
   include_default_lang: true                     # 在所有 URL 中包含默认语言前缀
   include_default_lang_file_extension: true      # 如果为 true，在文件扩展名中包含默认语言代码：default.en.md
   translations: true                             # 如果为 false，使用翻译键而不是翻译字符串
