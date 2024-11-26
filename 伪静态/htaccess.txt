@@ -1,0 +1,77 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+## 开始 - RewriteBase
+# 如果在子页面中遇到 500 或 404 错误，您可能需要取消注释 RewriteBase 条目。
+# 您应该将 '/' 替换为您的子文件夹路径。例如，如果您的 erel 安装在网站根目录下，
+# 则 '/' 应该可以正常工作，否则可能是类似于：RewriteBase /<your_sub_folder>。
+##
+
+# RewriteBase /
+
+## 结束 - RewriteBase
+
+## 开始 - X-Forwarded-Proto
+# 在某些托管或负载均衡环境中，SSL 协商发生在上游。
+# 为了让 erel 识别连接为安全连接，您需要取消注释以下行。
+#
+# RewriteCond %{HTTP:X-Forwarded-Proto} https
+# RewriteRule .* - [E=HTTPS:on]
+#
+## 结束 - X-Forwarded-Proto
+
+## 开始 - 防止漏洞利用
+# 如果您在网站上遇到问题，可以屏蔽以下操作。
+# 这些规则尝试阻止对 erel 最常见的漏洞利用行为。
+#
+# 阻止任何试图在 URL 中使用 Twig 标签的脚本。
+RewriteCond %{REQUEST_URI} ({{|}}|{%|%}) [OR]
+RewriteCond %{QUERY_STRING} ({{|}}|{%25|%25}) [OR]
+# 阻止任何试图在 URL 中使用 base64_encode 的脚本。
+RewriteCond %{QUERY_STRING} base64_encode[^(]*\([^)]*\) [OR]
+# 阻止任何在 URL 中包含 <script> 标签的脚本。
+RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+# 阻止任何试图通过 URL 设置 PHP GLOBALS 变量的脚本。
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+# 阻止任何试图通过 URL 修改 _REQUEST 变量的脚本。
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+# 返回 403 Forbidden 头并显示根主页内容。
+RewriteRule .* index.php [F]
+#
+## 结束 - 防止漏洞利用
+
+## 开始 - Index
+# 如果请求的路径和文件不是 /index.php 且请求尚未被内部重写为 index.php 脚本
+RewriteCond %{REQUEST_URI} !^/index\.php
+# 且请求的路径和文件不直接匹配一个物理文件
+RewriteCond %{REQUEST_FILENAME} !-f
+# 且请求的路径和文件不直接匹配一个物理文件夹
+RewriteCond %{REQUEST_FILENAME} !-d
+# 将请求内部重写为 index.php 脚本
+RewriteRule .* index.php [L]
+## 结束 - Index
+
+## 开始 - 安全性
+# 阻止直接访问以下文件夹
+RewriteRule ^(\.git|cache|bin|logs|backup|webserver-configs|tests)/(.*) error [F]
+# 阻止访问系统文件夹中的以下文件类型
+RewriteRule ^(system|vendor)/(.*)\.(txt|xml|md|html|json|yaml|yml|php|pl|py|cgi|twig|sh|bat)$ error [F]
+# 阻止访问用户文件夹中的以下文件类型
+RewriteRule ^(user)/(.*)\.(txt|md|json|yaml|yml|php|pl|py|cgi|twig|sh|bat)$ error [F]
+# 阻止直接访问所有 .md 文件：
+RewriteRule \.md$ error [F]
+# 阻止直接访问以点 (.) 开头的文件和文件夹（排除 `.well-known` 文件夹）
+RewriteRule (^|/)\.(?!well-known) - [F]
+# 阻止访问根文件夹中的以下特定文件
+RewriteRule ^(LICENSE\.txt|composer\.lock|composer\.json|\.htaccess)$ error [F]
+## 结束 - 安全性
+
+</IfModule>
+
+# 开始 - 防止目录浏览并设置默认资源
+# 禁止目录浏览。
+Options -Indexes
+# 设置默认的资源文件优先级。
+DirectoryIndex index.php index.html index.htm
+# 结束 - 防止目录浏览并设置默认资源
