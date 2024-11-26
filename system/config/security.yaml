@@ -1,47 +1,47 @@
-xss_whitelist: [admin.super] # Whitelist of user access that should 'skip' XSS checking
+xss_whitelist: [admin.super] # 用户访问白名单，跳过 XSS 检查的用户角色
 xss_enabled:
-    on_events: true
-    invalid_protocols: true
-    moz_binding: true
-    html_inline_styles: true
-    dangerous_tags: true
+    on_events: true          # 在事件中启用 XSS 检查
+    invalid_protocols: true  # 启用对无效协议的检查
+    moz_binding: true        # 启用对 Mozilla Binding 的检查
+    html_inline_styles: true # 启用对 HTML 内联样式的检查
+    dangerous_tags: true     # 启用对危险标签的检查
 xss_invalid_protocols:
-    - javascript
-    - livescript
-    - vbscript
-    - mocha
-    - feed
-    - data
+    - javascript             # 检查并阻止 javascript 协议
+    - livescript             # 检查并阻止 livescript 协议
+    - vbscript               # 检查并阻止 vbscript 协议
+    - mocha                  # 检查并阻止 mocha 协议
+    - feed                   # 检查并阻止 feed 协议
+    - data                   # 检查并阻止 data 协议
 xss_dangerous_tags:
-    - applet
-    - meta
-    - xml
-    - blink
-    - link
-    - style
-    - script
-    - embed
-    - object
-    - iframe
-    - frame
-    - frameset
-    - ilayer
-    - layer
-    - bgsound
-    - title
-    - base
+    - applet                 # 检查并阻止 <applet> 标签
+    - meta                   # 检查并阻止 <meta> 标签
+    - xml                    # 检查并阻止 <xml> 标签
+    - blink                  # 检查并阻止 <blink> 标签
+    - link                   # 检查并阻止 <link> 标签
+    - style                  # 检查并阻止 <style> 标签
+    - script                 # 检查并阻止 <script> 标签
+    - embed                  # 检查并阻止 <embed> 标签
+    - object                 # 检查并阻止 <object> 标签
+    - iframe                 # 检查并阻止 <iframe> 标签
+    - frame                  # 检查并阻止 <frame> 标签
+    - frameset               # 检查并阻止 <frameset> 标签
+    - ilayer                 # 检查并阻止 <ilayer> 标签
+    - layer                  # 检查并阻止 <layer> 标签
+    - bgsound                # 检查并阻止 <bgsound> 标签
+    - title                  # 检查并阻止 <title> 标签
+    - base                   # 检查并阻止 <base> 标签
 uploads_dangerous_extensions:
-    - php
-    - php2
-    - php3
-    - php4
-    - php5
-    - phar
-    - phtml
-    - html
-    - htm
-    - shtml
-    - shtm
-    - js
-    - exe
-sanitize_svg: true
+    - php                    # 检查并阻止上传 .php 文件
+    - php2                   # 检查并阻止上传 .php2 文件
+    - php3                   # 检查并阻止上传 .php3 文件
+    - php4                   # 检查并阻止上传 .php4 文件
+    - php5                   # 检查并阻止上传 .php5 文件
+    - phar                   # 检查并阻止上传 .phar 文件
+    - phtml                  # 检查并阻止上传 .phtml 文件
+    - html                   # 检查并阻止上传 .html 文件
+    - htm                    # 检查并阻止上传 .htm 文件
+    - shtml                  # 检查并阻止上传 .shtml 文件
+    - shtm                   # 检查并阻止上传 .shtm 文件
+    - js                     # 检查并阻止上传 .js 文件
+    - exe                    # 检查并阻止上传 .exe 文件
+sanitize_svg: true            # 启用对 SVG 文件的清理

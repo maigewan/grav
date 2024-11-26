@@ -1,53 +1,53 @@
 actions:
   site:
     type: access
-    label: Site
+    label: Site                    # 站点权限
   admin:
     type: access
-    label: Admin
+    label: Admin                   # 管理权限
   admin.pages:
     type: access
-    label: Pages
+    label: Pages                   # 页面管理权限
   admin.users:
     type: access
-    label: User Accounts
+    label: User Accounts           # 用户账户管理权限
 
 types:
   default:
-    type: access
+    type: access                   # 默认类型，定义为访问权限
 
   crud:
-    type: compact
-    letters:
+    type: compact                  # 类型为精简模式
+    letters:                       # 字母操作映射
       c:
-        action: create
-        label: PLUGIN_ADMIN.CREATE
+        action: create             # 动作：创建
+        label: PLUGIN_ADMIN.CREATE # 标签：创建
       r:
-        action: read
-        label: PLUGIN_ADMIN.READ
+        action: read               # 动作：读取
+        label: PLUGIN_ADMIN.READ   # 标签：读取
       u:
-        action: update
-        label: PLUGIN_ADMIN.UPDATE
+        action: update             # 动作：更新
+        label: PLUGIN_ADMIN.UPDATE # 标签：更新
       d:
-        action: delete
-        label: PLUGIN_ADMIN.DELETE
+        action: delete             # 动作：删除
+        label: PLUGIN_ADMIN.DELETE # 标签：删除
 
   crudp:
-    type: crud
-    letters:
+    type: crud                     # 基于 CRUD 类型
+    letters:                       # 字母操作映射
       p:
-        action: publish
-        label: PLUGIN_ADMIN.PUBLISH
+        action: publish            # 动作：发布
+        label: PLUGIN_ADMIN.PUBLISH # 标签：发布
 
   crudl:
-    type: crud
-    letters:
+    type: crud                     # 基于 CRUD 类型
+    letters:                       # 字母操作映射
       l:
-        action: list
-        label: PLUGIN_ADMIN.LIST
+        action: list               # 动作：列出
+        label: PLUGIN_ADMIN.LIST   # 标签：列出
 
   crudpl:
-    type: crud
-    use:
-      - crudp
-      - crudl
+    type: crud                     # 基于 CRUD 类型
+    use:                           # 使用已定义的操作类型
+      - crudp                      # 包含发布权限
+      - crudl                      # 包含列出权限

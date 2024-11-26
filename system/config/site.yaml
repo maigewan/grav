@@ -1,33 +1,33 @@
-title: Grav                                 # Name of the site
-default_lang: en                            # Default language for site (potentially used by theme)
+title: erelcms                                 # 网站名称
+default_lang: zh                            # 网站的默认语言（可能被主题使用）
 
 author:
-  name: John Appleseed                      # Default author name
-  email: 'john@example.com'                 # Default author email
+  name: John Appleseed                      # 默认作者名称
+  email: 'john@example.com'                 # 默认作者邮箱
 
-taxonomies: [category,tag]                  # Arbitrary list of taxonomy types
+taxonomies: [category,tag]                  # 分类法类型的任意列表
 
 metadata:
-  description: 'My Grav Site'               # Site description
+  description: 'erelcms默认描述'               # 网站描述
 
 summary:
-  enabled: true                             # enable or disable summary of page
-  format: short                             # long = summary delimiter will be ignored; short = use the first occurrence of delimiter or size
-  size: 300                                 # Maximum length of summary (characters)
-  delimiter: ===                            # The summary delimiter
+  enabled: true                             # 启用或禁用页面摘要
+  format: short                             # long = 忽略摘要分隔符；short = 使用分隔符首次出现的位置或指定大小
+  size: 300                                 # 摘要的最大长度（字符数）
+  delimiter: ===                            # 摘要分隔符
 
 redirects:
-#  '/redirect-test': '/'                    # Redirect test goes to home page
-#  '/old/(.*)': '/new/$1'                   # Would redirect /old/my-page to /new/my-page
+#  '/redirect-test': '/'                    # 将 /redirect-test 重定向到首页
+#  '/old/(.*)': '/new/$1'                   # 将 /old/my-page 重定向到 /new/my-page
 
 routes:
-#  '/something/else': '/blog/sample-3'      # Alias for /blog/sample-3
-#  '/new/(.*)': '/blog/$1'                  # Regex any /new/my-page URL to /blog/my-page Route
+#  '/something/else': '/blog/sample-3'      # 将 /blog/sample-3 的别名设置为 /something/else
+#  '/new/(.*)': '/blog/$1'                  # 将 /new/my-page 的 URL 正则映射到 /blog/my-page 路由
 
 blog:
-  route: '/blog'                            # Custom value added (accessible via site.blog.route)
+  route: '/news'                            # 自定义值（可通过 site.blog.route 访问）
 
-#menu:                                      # Menu Example
+#menu:                                      # 菜单示例
 #    - text: Source
 #      icon: github
 #      url: https://github.com/getgrav/grav

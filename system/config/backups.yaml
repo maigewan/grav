@@ -1,15 +1,14 @@
 purge:
-    trigger: space
-    max_backups_count: 25
-    max_backups_space: 5
-    max_backups_time: 365
+    trigger: space                           # 清理触发条件：基于空间
+    max_backups_count: 25                    # 最大备份数量限制
+    max_backups_space: 5                     # 最大备份占用空间限制（以 GB 为单位）
+    max_backups_time: 365                    # 最大备份保存时间限制（以天为单位）
 
 profiles:
   -
-    name: 'Default Site Backup'
-    root: '/'
-    schedule: false
-    schedule_at: '0 3 * * *'
-    exclude_paths: "/backup\r\n/cache\r\n/images\r\n/logs\r\n/tmp"
-    exclude_files: ".DS_Store\r\n.git\r\n.svn\r\n.hg\r\n.idea\r\n.vscode\r\nnode_modules"
-
+    name: 'erelcms Default Site Backup'             # 配置文件名称：默认站点备份
+    root: '/'                               # 备份的根目录
+    schedule: false                         # 是否启用计划任务
+    schedule_at: '0 3 * * *'                # 计划任务时间（Cron 表达式）
+    exclude_paths: "/backup\r\n/cache\r\n/images\r\n/logs\r\n/tmp" # 排除的路径列表
+    exclude_files: ".DS_Store\r\n.git\r\n.svn\r\n.hg\r\n.idea\r\n.vscode\r\nnode_modules" # 排除的文件列表
