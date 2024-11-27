@@ -1,64 +1,70 @@
-enabled: true                               # Enable the plugin
-built_in_css: true                          # Use built-in CSS
-redirect_to_login: false                    # If you try to access a page you don't have access to, should you redirect to login route
-redirect_after_login: false                 # Path to redirect to after a successful login
-redirect_after_logout: true                 # Path to redirect to after a successful logout
-session_user_sync: false                    # Sync session user with changes in stored user file
-site_host:                                  # Site host to use for email links. Enhances security by ensuring links are to the correct host (e.g. https://foo.com)
+enabled: true                               # 启用插件
+built_in_css: true                          # 使用插件内置的 CSS 样式
+redirect_to_login: false                    # 当尝试访问没有权限的页面时，是否重定向到登录页面
+redirect_after_login: false                 # 登录成功后重定向的路径（如果需要设置，填写路径）
+redirect_after_logout: true                 # 登出后重定向的路径（默认为主页或自定义路径）
+session_user_sync: false                    # 将会话中的用户与存储的用户文件同步
+site_host:                                  # 邮件链接中使用的站点主机地址，增加安全性，确保链接指向正确的主机（例如 https://foo.com）
 
-route: '/login'                             # Specific route for Login page (default is '/login')
-route_after_login: '/'                      # Route to go to after login if enabled
-route_after_logout: '/'                     # Route to logout to if enabled
-route_activate: '/activate_user'            # Route for the user activation process
-route_forgot: '/forgot_password'            # Route for the forgot password process
-route_reset: '/reset_password'              # Route for the reset password process
-route_profile: '/user_profile'              # Route for the user profile page
-route_register: '/user_register'            # Route for the user registration page
-route_unauthorized: '/user_unauthorized'    # Route for a page to display if user is unauthorized
+route: '/login'                             # 登录页面的特定路径（默认为 '/login'）
+route_after_login: '/'                      # 登录成功后重定向的路径（可以是首页或特定页面）
+route_after_logout: '/'                     # 登出后重定向的路径（可以是首页或特定页面）
+route_activate: '/activate_user'            # 用户激活流程的路径
+route_forgot: '/forgot_password'            # 忘记密码流程的路径
+route_reset: '/reset_password'              # 密码重置流程的路径
+route_profile: '/user_profile'              # 用户个人资料页面的路径
+route_register: '/user_register'            # 用户注册页面的路径
+route_unauthorized: '/user_unauthorized'    # 用户无权限访问时显示的页面路径
 
-twofa_enabled: false                        # Two factor authentication enabled
-dynamic_page_visibility: false              # Integrate access into page visibility so things can be shown or hidden in the menu
-parent_acl: false                           # Look to parent `access` rules for access requirements
-protect_protected_page_media: false         # Take `access` rules into account when directly accessing a page's media
+twofa_enabled: false                        # 是否启用双因素身份验证
+dynamic_page_visibility: false              # 是否根据访问权限动态显示页面（菜单中是否隐藏或显示页面）
+parent_acl: false                           # 是否使用父级页面的访问规则进行访问控制
+protect_protected_page_media: false         # 是否根据页面访问权限控制对页面媒体文件的直接访问
 
 rememberme:
-  enabled: true                             # Enable 'remember me' functionality
-  timeout: 604800                           # Timeout in seconds. Defaults to 1 week
-  name: grav-rememberme                     # Name prefix of the session cookie
+  enabled: true                             # 启用 "记住我" 功能
+  timeout: 604800                           # 超时时间（以秒为单位），默认是一周（604800 秒）
+  name: grav-rememberme                     # 会话 cookie 的名称前缀
 
-max_pw_resets_count: 2                      # Number of password resets in a specific time frame (0 = unlimited)
-max_pw_resets_interval: 60                  # Time in minutes to track password resets
-max_login_count: 5                          # Number of failed login attempts in a specific time frame (0 = unlimited)
-max_login_interval: 10                      # Time in minutes to track login attempts
-ipv6_subnet_size: 64                        # Size of IPv6 block to track login attempts
+max_pw_resets_count: 2                      # 在特定时间段内允许的最大密码重置次数（0 表示无限制）
+max_pw_resets_interval: 60                  # 密码重置次数统计的时间范围（分钟）
+max_login_count: 5                          # 在特定时间段内允许的最大登录失败次数（0 表示无限制）
+max_login_interval: 10                      # 登录失败次数统计的时间范围（分钟）
+ipv6_subnet_size: 64                        # IPv6 地址块大小，用于登录尝试跟踪（根据安全需求调整）
 
 user_registration:
-  enabled: false                            # Enable User Registration Process
+  enabled: false                            # 是否启用用户注册功能
 
-  fields:                                   # List of fields to validate and store during user registration
-    - 'username'                            # This should match up with your registration form definition
-    - 'password'
-    - 'email'
-    - 'fullname'
-    - 'title'
-    - 'level'
-    - 'twofa_enabled'
+  fields:                                   # 在用户注册过程中需要验证和存储的字段列表
+    - 'username'                            # 用户名（对应注册表单中的字段）
+    - 'password'                            # 密码
+    - 'email'                               # 电子邮件地址
+    - 'fullname'                            # 用户全名
+    - 'title'                               # 用户头衔或称号
+    - 'level'                               # 用户级别
+    - 'twofa_enabled'                       # 是否启用双因素身份验证
 
-  default_values:                           # Any default values for fields you would like to set
-    level: Newbie                           # Here the 'level' field will be pre-populated with 'Newbie' text
+  default_values:                           # 字段的默认值
+    level: Newbie                           # "level" 字段的默认值为 "Newbie"
 
-  access:                                   # Default access to set for users created during registration
+  access:                                   # 用户注册时默认分配的访问权限
     site:
-      login: true
+      login: true                           # 默认允许注册用户登录站点
 
-  redirect_after_registration: ''           # Route to redirect to after registration
-  redirect_after_activation: ''             # Route to redirect to after activation
+  redirect_after_registration: ''           # 注册成功后重定向的路径（留空表示不重定向）
+  redirect_after_activation: ''             # 激活成功后重定向的路径（留空表示不重定向）
 
   options:
-    validate_password1_and_password2: true  # Ensure that password1 and password2 match during registration (allows you to have just 1 pw field or 2)
-    set_user_disabled: false                # Set this `true` if you want a user to activate their account via email
-    login_after_registration: false         # Automatically login after registration
-    send_activation_email: false            # Send an email that requires a special link to be clicked in order to activate the account
-    manually_enable: false                  # When using activation email, don't enable until an admin does it manually
-    send_notification_email: false          # Send an email to the site administrator to indicate a user has registered
-    send_welcome_email: false               # Send a welcome email to the user (probably should not be used with `send_activation_email`
+    validate_password1_and_password2: true  # 在注册过程中，验证两个密码字段（password1 和 password2）是否匹配
+    set_user_disabled: false                # 是否在注册后将用户设置为禁用（需要邮件激活）
+    login_after_registration: false         # 用户注册成功后是否自动登录
+    send_activation_email: false            # 是否发送激活邮件（用户需点击链接以激活账户）
+    manually_enable: false                  # 如果启用激活邮件，是否需要管理员手动启用账户
+    send_notification_email: false          # 是否向站点管理员发送通知邮件，提醒有用户注册
+    send_welcome_email: false               # 是否向注册用户发送欢迎邮件（与激活邮件互斥，二者不要同时启用）
+
+# 补充说明：
+# - 此配置文件主要用于 Grav CMS 的登录和注册插件。
+# - 可以根据需要调整路径、规则和功能选项。
+# - 如果开启 "记住我" 功能，确保配置的超时时间和安全设置满足需求。
+# - 对用户注册功能，建议同时启用邮箱验证以提升安全性。

@@ -3,12 +3,12 @@ slug: login
 type: plugin
 version: 3.7.9
 testing: false
-description: Enables user authentication and login screen.
+description: 启用用户身份验证和登录屏幕。
 icon: sign-in
 author:
-  name: Team Grav
-  email: devs@getgrav.org
-  url: http://getgrav.org
+  name: erelcms团队
+  email: erelcms@gmail.com
+  url: https://www.erelcms.com
 homepage: https://github.com/getgrav/grav-plugin-login
 keywords: login, authentication, admin, security
 bugs: https://github.com/getgrav/grav-plugin-login/issues
