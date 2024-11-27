@@ -1,12 +1,4 @@
 <?php
-
-/**
- * @package    Grav\Framework\Cache
- *
- * @copyright  Copyright (c) 2015 - 2024 Trilby Media, LLC. All rights reserved.
- * @license    MIT License; see LICENSE file for details.
- */
-
 namespace Grav\Framework\Cache;
 
 use DateInterval;

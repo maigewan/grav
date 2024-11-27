@@ -1,5 +1,5 @@
 <?php
-if (!defined('GRAV_ROOT')) { // 如果没有定义 GRAV_ROOT 常量
+if (!defined('GRAV_ROOT')) { // 如果没有定义常量
     die(); // 停止执行。
 }
 
