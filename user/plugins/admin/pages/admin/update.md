@@ -1,6 +1,6 @@
 ---
-title: Updates
-template: default
+title: 更新
+template: 默认
 expires: 0
 
 access:

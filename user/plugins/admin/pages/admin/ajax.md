@@ -1,6 +1,6 @@
 ---
-title: Generic Ajax
-template: default
+title: 通用 Ajax
+template: 默认
 expires: 0
 
 access:

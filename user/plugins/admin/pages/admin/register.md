@@ -1,5 +1,5 @@
 ---
-title: Register Admin User
+title: erelcms注册管理员用户
 expires: 0
 access:
   admin.login: false
@@ -23,7 +23,7 @@ forms:
       email:
         type: email
         label: PLUGIN_ADMIN.EMAIL
-        placeholder: "valid email address"
+        placeholder: "邮件地址"
         validate:
           type: email
           message: PLUGIN_ADMIN.EMAIL_VALIDATION_MESSAGE
@@ -49,15 +49,15 @@ forms:
 
       fullname:
         type: text
-        placeholder: "e.g. 'Joe Schmoe'"
+        placeholder: "后台显示名字'"
         label: PLUGIN_ADMIN.FULL_NAME
         validate:
           required: true
 
       title:
         type: text
-        placeholder: "e.g. 'Administrator'"
+        placeholder: "后台管理员名称"
         label: PLUGIN_ADMIN.TITLE
 ---
 
-The Admin plugin has been installed, but no **admin accounts** could be found. Please create an admin account to ensure your Grav install is secure...
+首次使用请创建**管理员**...

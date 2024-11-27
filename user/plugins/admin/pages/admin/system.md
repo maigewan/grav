@@ -1,6 +1,6 @@
 ---
-title: Configuration
-template: config
+title: 配置
+template: 配置
 expires: 0
 
 access:

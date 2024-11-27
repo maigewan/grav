@@ -1,6 +1,6 @@
 ---
-title: Pages Filter
-template: default
+title: 页面筛选
+template: 默认
 expires: 0
 
 access:

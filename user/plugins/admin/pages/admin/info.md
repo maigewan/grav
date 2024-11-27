@@ -1,6 +1,6 @@
 ---
-title: PHP Info
-template: config
+title: PHP 信息
+template: 配置
 expires: 0
 
 access:

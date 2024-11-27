@@ -1,5 +1,5 @@
 ---
-title: Statistics
+title: 统计
 expires: 0
 
 access:

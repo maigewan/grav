@@ -1,5 +1,5 @@
 ---
-title: Pages
+title: 页面
 expires: 0
 
 access:

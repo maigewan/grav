@@ -1,5 +1,5 @@
 ---
-title: Reset password
+title: 重置密码
 expires: 0
 access:
   admin.login: false
@@ -13,11 +13,11 @@ forms:
     fields:
       username:
         type: text
-        placeholder: PLUGIN_ADMIN.USERNAME
+        placeholder: 用户名
         readonly: true
       password:
         type: password
-        placeholder: PLUGIN_ADMIN.PASSWORD
+        placeholder: 密码
         autofocus: true
       token:
         type: hidden

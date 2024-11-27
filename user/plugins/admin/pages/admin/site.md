@@ -1,6 +1,6 @@
 ---
-title: Site Settings
-template: config
+title: 站点设置
+template: 配置
 expires: 0
 
 access:

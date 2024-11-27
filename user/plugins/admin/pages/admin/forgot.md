@@ -1,5 +1,5 @@
 ---
-title: Forgot password
+title: 忘记密码
 expires: 0
 access:
   admin.login: false
@@ -12,7 +12,7 @@ forms:
     fields:
       username:
         type: text
-        placeholder: PLUGIN_ADMIN.USERNAME
+        placeholder: 用户名
         autofocus: true
         validate:
           required: true

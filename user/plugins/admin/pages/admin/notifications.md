@@ -1,6 +1,6 @@
 ---
-title: Notifications
-template: default
+title: 通知
+template: 默认
 expires: 0
 
 access:

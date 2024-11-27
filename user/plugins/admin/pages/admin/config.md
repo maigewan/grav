@@ -1,5 +1,5 @@
 ---
-title: Config
+title: 配置
 expires: 0
 
 access:

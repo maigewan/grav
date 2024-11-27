@@ -1,5 +1,5 @@
 ---
-title: Admin Login
+title: 管理员登录
 expires: 0
 access:
   admin.login: false
@@ -12,14 +12,14 @@ forms:
     fields:
       username:
         type: text
-        placeholder: PLUGIN_ADMIN.USERNAME_EMAIL
+        placeholder: 用户名或邮箱
         autofocus: true
         validate:
           required: true
 
       password:
         type: password
-        placeholder: PLUGIN_ADMIN.PASSWORD
+        placeholder: 密码
         validate:
           required: true
 
@@ -31,15 +31,12 @@ forms:
       2fa_instructions:
         type: display
         markdown: true
-        content: PLUGIN_ADMIN.2FA_INSTRUCTIONS
+        content: 双因素认证说明
       2fa_code:
         type: text
         id: twofa-code
         autofocus: true
-        placeholder: PLUGIN_ADMIN.2FA_CODE_INPUT
-        description: or
+        placeholder: 输入双因素认证代码
+        description: 或
       yubikey_otp: 
-        type: text
-        id: yubikey-otp
-        placeholder: PLUGIN_ADMIN.YUBIKEY_OTP_INPUT
----
+        type

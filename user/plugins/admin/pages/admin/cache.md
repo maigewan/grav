@@ -1,6 +1,6 @@
 ---
-title: Cache
-template: default
+title: 缓存
+template: 默认
 expires: 0
 
 access:

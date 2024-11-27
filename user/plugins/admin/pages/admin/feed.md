@@ -1,5 +1,5 @@
 ---
-title: News Feed
+title: 新闻订阅
 template: ajax
 expires: 0
 

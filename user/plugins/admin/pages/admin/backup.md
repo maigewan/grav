@@ -1,6 +1,6 @@
 ---
-title: Backup
-template: default
+title: 备份
+template: 默认
 expires: 0
 
 access:
